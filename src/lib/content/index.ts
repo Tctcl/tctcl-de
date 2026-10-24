@@ -13,6 +13,7 @@ import {
   type Post,
   type RenderedPost,
 } from "./schema";
+import { assertPublicImage } from "./public-assets";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content", "blog");
 const WORDS_PER_MINUTE = 200;
@@ -113,6 +114,10 @@ function readPostsForLocale(locale: Locale): Post[] {
 
     if (!parsed.content.trim()) {
       throw new Error(`The article in ${relativePath} has no body.`);
+    }
+
+    if (data.image) {
+      assertPublicImage(data.image, relativePath);
     }
 
     return {

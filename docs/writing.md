@@ -128,8 +128,18 @@ Every Markdown image must have meaningful alt text. A missing or empty alt text
 fails the build. Inline images are rendered at their natural ratio with a
 maximum width of 100%, so use reasonably sized files (WebP, JPEG or PNG).
 
+Images must be local files that exist under `public/`. The loader checks both
+Markdown images and the `image` frontmatter field:
+
+- a relative path, a remote URL or a protocol-relative URL fails the build;
+- a path that points outside `public/` fails the build;
+- a local path whose file does not exist fails the build.
+
+This keeps the journal free of third-party image requests and turns a broken
+path into a build error rather than a broken page.
+
 The optional `image` frontmatter field is the article's social/lead image and
-requires `imageAlt`.
+requires `imageAlt`. It follows the same local-file rules as Markdown images.
 
 ### Code
 
@@ -184,7 +194,8 @@ language, drafts and unknown keys all fail the build.
 
 1. Write the file in the correct language folder and set `draft: false`.
 2. Add a descriptive `description`; it is the listing and search snippet.
-3. Add `image` and `imageAlt` if the article should have a lead image.
+3. Add `image` and `imageAlt` if the article should have a lead image, and make
+   sure every referenced file exists under `public/`.
 4. Check every internal link and every `relatedArticles` key.
 5. Add or update the translation with the same `translationKey` if one exists.
 6. Run the checks:
@@ -210,6 +221,7 @@ The build stops with a file and field reference when, for example:
 - a related article is missing, drafted or in the other language;
 - an internal link points to a non-existent or unpublished page;
 - a Markdown image has no alt text;
+- an image path is remote, relative, outside `public/` or points to a missing file;
 - the article body is empty.
 
 A failing build is intentional: it is better than publishing a page with broken

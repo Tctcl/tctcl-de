@@ -11,6 +11,7 @@ import { unified, type Transformer } from "unified";
 import { visit } from "unist-util-visit";
 
 import { inkCodeTheme } from "./ink-code-theme";
+import { assertPublicImage } from "./public-assets";
 import type { Heading, Post, RenderedPost } from "./schema";
 
 function collectHeadings(headings: Heading[]): Transformer<Root, Root> {
@@ -66,12 +67,21 @@ function rehypeArticleImages(filePath: string): Transformer<Root, Root> {
       }
 
       const alt = node.properties?.alt;
+      const src = node.properties?.src;
 
       if (typeof alt !== "string" || alt.trim().length === 0) {
         throw new Error(
           `Missing image alt text in ${filePath}. Markdown images must use a descriptive alt text: ![description](/path/to/image.jpg).`,
         );
       }
+
+      if (typeof src !== "string" || src.length === 0) {
+        throw new Error(
+          `Missing image path in ${filePath}. Markdown images must point to a local public file.`,
+        );
+      }
+
+      assertPublicImage(src, filePath);
 
       node.properties.loading = "lazy";
       node.properties.decoding = "async";
