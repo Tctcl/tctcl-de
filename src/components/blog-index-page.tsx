@@ -47,7 +47,7 @@ export function BlogIndexPage({ locale, page }: BlogIndexPageProps) {
   const intro = page === 1 ? copy.blog.intro : copy.blog.description;
 
   return (
-    <SiteShell locale={locale} alternateHref={alternateHref} current="blog">
+    <SiteShell locale={locale} alternateHref={alternateHref} current="journal">
       <JsonLd id="blog-jsonld" data={blogStructuredData(locale)} />
 
       <section className="mx-auto max-w-6xl px-5 pb-12 pt-12 sm:pt-16 md:px-8">

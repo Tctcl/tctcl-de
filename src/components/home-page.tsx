@@ -1,243 +1,280 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 
 import { ArticleCard } from "@/components/article-card";
 import { EmptyState } from "@/components/empty-state";
 import { JsonLd } from "@/components/json-ld";
+import { RoomMark } from "@/components/room-mark";
 import { SectionLabel } from "@/components/section-label";
 import { SiteShell } from "@/components/site-shell";
-import { projects } from "@/content/projects";
+import { nowEntries } from "@/content/now";
+import { getRoomCopy } from "@/content/rooms";
 import { getCopy } from "@/content/site-copy";
 import { getPublishedPosts } from "@/lib/content";
-import { sectionIds, type Locale } from "@/lib/locale";
-import {
-  blogPath,
-  homePath,
-} from "@/lib/routes";
-import { BUILD_YEAR } from "@/lib/site";
+import type { Locale } from "@/lib/locale";
+import { blogPath, homePath, roomPath, type RoomId } from "@/lib/routes";
 import {
   personStructuredData,
   websiteStructuredData,
 } from "@/lib/structured-data";
 
-function ProjectLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: ReactNode;
-}) {
-  const className = "transition-colors hover:text-blood";
+type HomeRoom = {
+  key: RoomId | "journal";
+  span: string;
+  feature?: boolean;
+};
 
-  if (href.startsWith("/")) {
-    return (
-      <Link href={href} className={className}>
-        {children}
-      </Link>
-    );
-  }
-
-  return (
-    <a
-      href={href}
-      className={className}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {children}
-    </a>
-  );
-}
+const homeRooms: HomeRoom[] = [
+  { key: "music", span: "md:col-span-7", feature: true },
+  { key: "tinkering", span: "md:col-span-5" },
+  { key: "projects", span: "md:col-span-5" },
+  { key: "journal", span: "md:col-span-7" },
+  { key: "about", span: "md:col-span-4" },
+  { key: "work", span: "md:col-span-8" },
+];
 
 export function HomePage({ locale }: { locale: Locale }) {
   const copy = getCopy(locale);
-  const ids = sectionIds[locale];
   const posts = getPublishedPosts(locale).slice(0, 3);
   const alternateHref = homePath(locale === "de" ? "en" : "de");
-  const quote =
-    locale === "de" ? `„${copy.about.quote}“` : `“${copy.about.quote}”`;
+  const now = nowEntries[locale];
 
   return (
-    <SiteShell
-      locale={locale}
-      alternateHref={alternateHref}
-      current="home"
-    >
+    <SiteShell locale={locale} alternateHref={alternateHref} current="home">
       <JsonLd id="person-jsonld" data={personStructuredData(locale)} />
       <JsonLd id="website-jsonld" data={websiteStructuredData(locale)} />
 
-      <section className="mx-auto max-w-6xl px-5 pb-16 pt-12 sm:pt-16 md:px-8 md:pb-24">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-6">
-          <div className="md:col-span-7">
+      <section className="mx-auto max-w-6xl px-5 pb-14 pt-10 sm:pt-14 md:px-8 md:pb-20">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-8">
+          <div className="md:col-span-8">
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-blood">
-              {copy.hero.eyebrow}
+              {copy.home.eyebrow}
             </p>
 
-            <h1 className="mt-6 max-w-3xl font-serif text-[clamp(2.5rem,6.8vw,5.2rem)] font-semibold leading-[0.97] tracking-[-0.045em]">
-              {copy.hero.title}{" "}
+            <h1 className="mt-5 max-w-3xl font-serif text-[clamp(2.5rem,5.6vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
+              {copy.home.title}{" "}
               <span className="italic text-muted-foreground">
-                {copy.hero.titleAccent}
+                {copy.home.accent}
               </span>
-              <span
-                aria-hidden="true"
-                className="ml-2 inline-block h-2.5 w-2.5 bg-blood align-baseline"
-              />
             </h1>
 
-            <p className="mt-6 max-w-xl text-[15.5px] leading-7 text-muted-foreground sm:text-base">
-              {copy.hero.lead}
-            </p>
+            <div className="mt-6 max-w-2xl space-y-4 text-[15.5px] leading-7 text-muted-foreground sm:text-base">
+              {copy.home.intro.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[10px] uppercase tracking-[0.16em]">
+            <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 font-mono text-[10px] uppercase tracking-[0.16em]">
+              <a href="#rooms" className="editorial-link text-blood">
+                {copy.home.roomsTitle} ↓
+              </a>
               <Link
                 href={blogPath(locale)}
-                className="editorial-link text-blood"
-              >
-                {copy.hero.journalCta} →
-              </Link>
-              <Link
-                href={`#${ids.about}`}
                 className="editorial-link text-muted-foreground"
               >
-                {copy.hero.aboutCta} ↓
+                {copy.nav.journal} →
               </Link>
             </div>
-
-            <ul className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">
-              {copy.hero.facts.map((fact, index) => (
-                <li key={fact} className="flex items-center gap-3">
-                  {index > 0 ? (
-                    <span aria-hidden="true" className="text-blood">
-                      /
-                    </span>
-                  ) : null}
-                  <span>{fact}</span>
-                </li>
-              ))}
-            </ul>
           </div>
 
-          <div className="hidden md:col-span-4 md:col-start-9 md:block">
-            <div
-              aria-hidden="true"
-              className="ml-auto aspect-square w-full max-w-[250px] border border-border p-3"
-            >
-              <div className="relative h-full border border-border">
-                <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-border" />
-                <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-border" />
-                <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blood" />
-                <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 bg-blood" />
-                <span className="absolute left-3 top-2 font-mono text-[7px] uppercase tracking-[0.16em] text-muted-foreground">
-                  {copy.hero.cardTop}
-                </span>
-                <span className="absolute bottom-2 left-3 font-mono text-[7px] uppercase tracking-[0.16em] text-muted-foreground">
-                  {copy.hero.cardLabel} / 01
-                </span>
-                <span className="absolute bottom-2 right-3 font-mono text-[7px] uppercase tracking-[0.16em] text-muted-foreground">
-                  {copy.hero.cardBottom}
-                </span>
-              </div>
-            </div>
-            <p className="mt-3 text-right font-mono text-[8px] uppercase tracking-[0.18em] text-muted-foreground">
-              TCTCL / {BUILD_YEAR}
+          <aside className="border-t border-border pt-6 md:col-span-3 md:col-start-10 md:border-l md:border-t-0 md:pl-6 md:pt-0">
+            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
+              {copy.home.marginalLabel}
             </p>
-          </div>
+            <dl className="mt-5 space-y-4">
+              {copy.home.marginalFacts.map((fact) => (
+                <div key={fact.term}>
+                  <dt className="font-mono text-[8px] uppercase tracking-[0.16em] text-blood">
+                    {fact.term}
+                  </dt>
+                  <dd className="mt-1 font-serif text-base leading-snug">
+                    {fact.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-6 border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground">
+              {copy.home.marginalNote}
+            </p>
+            <p className="stamp mt-8 hidden lg:inline-block">
+              {copy.home.marginalStamp}
+            </p>
+          </aside>
         </div>
       </section>
 
       <section
-        id={ids.about}
-        aria-labelledby={`${ids.about}-title`}
+        id="rooms"
+        aria-labelledby="rooms-title"
         className="scroll-mt-24 border-t border-border"
       >
-        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
-          <div className="grid gap-8 md:grid-cols-12 md:gap-6">
+        <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+          <div className="grid gap-6 md:grid-cols-12">
             <div className="md:col-span-3">
-              <SectionLabel index="01">{copy.about.eyebrow}</SectionLabel>
+              <SectionLabel index="00">{copy.home.roomsLabel}</SectionLabel>
             </div>
-
-            <div className="md:col-span-6 md:col-start-5">
+            <div className="md:col-span-8 md:col-start-5">
               <h2
-                id={`${ids.about}-title`}
-                className="font-serif text-3xl leading-[1.05] tracking-[-0.025em] sm:text-4xl"
+                id="rooms-title"
+                className="font-serif text-3xl leading-tight tracking-[-0.025em] sm:text-4xl"
               >
-                {copy.about.title}
+                {copy.home.roomsTitle}
               </h2>
-              <div className="mt-6 space-y-4 text-[15px] leading-7 text-muted-foreground">
-                {copy.about.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-              <blockquote className="mt-8 border-l-2 border-blood pl-4 font-serif text-xl italic leading-snug text-foreground">
-                {quote}
-              </blockquote>
-            </div>
-
-            <aside className="md:col-span-2 md:col-start-11">
-              <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
-                {copy.about.asideLabel}
+              <p className="mt-3 max-w-xl text-[15px] leading-7 text-muted-foreground">
+                {copy.home.roomsIntro}
               </p>
-              <ul className="mt-3 space-y-2">
-                {copy.about.asideItems.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-2 border-t border-border pt-2 font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground"
+            </div>
+          </div>
+
+          <div className="mt-12 grid gap-x-6 gap-y-12 md:grid-cols-12 md:gap-x-8">
+            {homeRooms.map((room) => {
+              const isJournal = room.key === "journal";
+              const roomData = isJournal
+                ? null
+                : getRoomCopy(locale, room.key as RoomId);
+              const label = isJournal
+                ? copy.nav.journal
+                : (roomData?.label ?? "");
+              const index = isJournal ? "04" : (roomData?.index ?? "");
+              const teaser = isJournal
+                ? copy.home.journalIntro
+                : (roomData?.teaser ?? "");
+              const tags = isJournal
+                ? copy.home.journalTags
+                : (roomData?.tags ?? []);
+              const href = isJournal
+                ? blogPath(locale)
+                : roomPath(room.key as RoomId, locale);
+              const markVariant = isJournal
+                ? "journal"
+                : (room.key as RoomId);
+
+              if (room.feature) {
+                return (
+                  <Link
+                    key={room.key}
+                    href={href}
+                    className={`group relative flex flex-col justify-between overflow-hidden bg-ink p-6 text-background transition-colors hover:bg-[#221f1b] sm:p-8 md:min-h-[21rem] ${room.span}`}
                   >
+                    <div className="flex items-start justify-between gap-6">
+                      <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#c85a4a]">
+                        {index} / {label}
+                      </p>
+                      <span
+                        aria-hidden="true"
+                        className="font-mono text-sm text-[#c85a4a] transition-transform group-hover:translate-x-1"
+                      >
+                        ↗
+                      </span>
+                    </div>
+
+                    <div className="mt-12 flex items-end justify-between gap-8">
+                      <div>
+                        <h3 className="font-serif text-3xl leading-tight tracking-[-0.02em] sm:text-4xl">
+                          {label}
+                        </h3>
+                        <p className="mt-3 max-w-sm text-sm leading-relaxed text-background/70">
+                          {teaser}
+                        </p>
+                        <p className="mt-5 font-mono text-[8px] uppercase tracking-[0.16em] text-background/50">
+                          {tags.join(" / ")}
+                        </p>
+                        <p className="mt-5 font-mono text-[9px] uppercase tracking-[0.16em] text-background/80">
+                          {copy.home.roomCta} →
+                        </p>
+                      </div>
+                      <RoomMark
+                        variant={markVariant}
+                        className="hidden h-16 w-24 shrink-0 opacity-70 [&_span]:bg-background/40 sm:block"
+                      />
+                    </div>
+                  </Link>
+                );
+              }
+
+              return (
+                <Link
+                  key={room.key}
+                  href={href}
+                  className={`group flex flex-col border-t border-border pt-5 transition-colors hover:border-blood ${room.span}`}
+                >
+                  <div className="flex items-baseline justify-between gap-4">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-blood">
+                      {index} / {label}
+                    </p>
                     <span
                       aria-hidden="true"
-                      className="h-1 w-1 shrink-0 bg-blood"
+                      className="font-mono text-sm text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-blood"
+                    >
+                      ↗
+                    </span>
+                  </div>
+
+                  <div className="mt-5">
+                    <h3 className="font-serif text-2xl leading-tight tracking-[-0.02em]">
+                      {label}
+                    </h3>
+                    <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+                      {teaser}
+                    </p>
+                  </div>
+
+                  <div className="mt-auto flex items-end justify-between gap-4 pt-8">
+                    <p className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-foreground">
+                      {tags.join(" / ")}
+                    </p>
+                    <RoomMark
+                      variant={markVariant}
+                      className="hidden h-6 w-14 shrink-0 opacity-40 sm:block"
                     />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </aside>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
       <section
-        id={ids.work}
-        aria-labelledby={`${ids.work}-title`}
-        className="scroll-mt-24 border-t border-border"
+        aria-labelledby="now-title"
+        className="border-t border-border"
       >
-        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+        <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
           <div className="grid gap-8 md:grid-cols-12 md:gap-6">
             <div className="md:col-span-3">
-              <SectionLabel index="02">{copy.work.eyebrow}</SectionLabel>
+              <SectionLabel index="01">{copy.home.nowLabel}</SectionLabel>
             </div>
 
             <div className="md:col-span-8 md:col-start-5">
               <h2
-                id={`${ids.work}-title`}
-                className="font-serif text-3xl leading-[1.05] tracking-[-0.025em] sm:text-4xl"
+                id="now-title"
+                className="max-w-2xl font-serif text-3xl leading-tight tracking-[-0.025em] sm:text-4xl"
               >
-                {copy.work.title}
+                {copy.home.nowTitle}
               </h2>
-              <p className="mt-3 max-w-2xl text-[15px] leading-7 text-muted-foreground">
-                {copy.work.intro}
+              <p className="mt-3 max-w-xl text-[15px] leading-7 text-muted-foreground">
+                {copy.home.nowIntro}
               </p>
 
-              <ol className="mt-10 border-t border-border">
-                {copy.work.items.map((item, index) => (
+              <ol className="mt-8 border-t border-border">
+                {now.map((entry, index) => (
                   <li
-                    key={item.title}
-                    className="grid gap-2 border-b border-border py-6 sm:grid-cols-[2.5rem_minmax(0,1fr)_2fr] sm:items-baseline sm:gap-6"
+                    key={entry.title}
+                    className="grid gap-2 border-b border-border py-5 sm:grid-cols-[2.5rem_minmax(0,1fr)_2.5fr] sm:items-baseline sm:gap-6"
                   >
                     <span className="font-mono text-[10px] tracking-[0.12em] text-blood">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="font-serif text-2xl leading-tight tracking-[-0.01em]">
-                      {item.title}
-                    </h3>
                     <div>
-                      <p className="text-sm leading-relaxed text-muted-foreground">
-                        {item.description}
-                      </p>
-                      <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">
-                        {item.meta}
+                      <h3 className="font-serif text-xl leading-tight">
+                        {entry.title}
+                      </h3>
+                      <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.16em] text-muted-foreground">
+                        {entry.tag}
                       </p>
                     </div>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {entry.text}
+                    </p>
                   </li>
                 ))}
               </ol>
@@ -247,103 +284,29 @@ export function HomePage({ locale }: { locale: Locale }) {
       </section>
 
       <section
-        id={ids.projects}
-        aria-labelledby={`${ids.projects}-title`}
-        className="scroll-mt-24 border-t border-border"
+        aria-labelledby="journal-title"
+        className="border-t border-border"
       >
-        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+        <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
           <div className="grid gap-8 md:grid-cols-12 md:gap-6">
             <div className="md:col-span-3">
-              <SectionLabel index="03">
-                {copy.projects.eyebrow}
-              </SectionLabel>
+              <SectionLabel index="02">{copy.home.journalLabel}</SectionLabel>
             </div>
 
             <div className="md:col-span-8 md:col-start-5">
               <h2
-                id={`${ids.projects}-title`}
-                className="font-serif text-3xl leading-[1.05] tracking-[-0.025em] sm:text-4xl"
+                id="journal-title"
+                className="font-serif text-3xl leading-tight tracking-[-0.025em] sm:text-4xl"
               >
-                {copy.projects.title}
+                {copy.home.journalTitle}
               </h2>
-              <p className="mt-3 max-w-2xl text-[15px] leading-7 text-muted-foreground">
-                {copy.projects.intro}
-              </p>
-
-              {projects.length === 0 ? (
-                <EmptyState
-                  indent={false}
-                  label={copy.projects.emptyLabel}
-                  title={copy.projects.emptyTitle}
-                  text={copy.projects.emptyText}
-                  note={copy.projects.emptyNote}
-                />
-              ) : (
-                <ol className="mt-10 border-t border-border">
-                  {projects.map((project, index) => (
-                    <li
-                      key={project.name}
-                      className="grid gap-2 border-b border-border py-6 sm:grid-cols-[2.5rem_minmax(0,1fr)_2fr] sm:items-baseline sm:gap-6"
-                    >
-                      <span className="font-mono text-[10px] tracking-[0.12em] text-blood">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <h3 className="font-serif text-2xl leading-tight tracking-[-0.01em]">
-                        {project.href ? (
-                          <ProjectLink href={project.href}>
-                            {project.name}{" "}
-                            <span className="font-mono text-xs text-blood">
-                              ↗
-                            </span>
-                          </ProjectLink>
-                        ) : (
-                          project.name
-                        )}
-                      </h3>
-                      <div>
-                        <p className="text-sm leading-relaxed text-muted-foreground">
-                          {project.description}
-                        </p>
-                        <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">
-                          {[project.year, ...(project.tags ?? [])]
-                            .filter(Boolean)
-                            .join(" / ")}
-                        </p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        id={ids.writing}
-        aria-labelledby={`${ids.writing}-title`}
-        className="scroll-mt-24 border-t border-border"
-      >
-        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
-          <div className="grid gap-8 md:grid-cols-12 md:gap-6">
-            <div className="md:col-span-3">
-              <SectionLabel index="04">{copy.writing.eyebrow}</SectionLabel>
-            </div>
-
-            <div className="md:col-span-8 md:col-start-5">
-              <h2
-                id={`${ids.writing}-title`}
-                className="font-serif text-3xl leading-[1.05] tracking-[-0.025em] sm:text-4xl"
-              >
-                {copy.writing.title}
-              </h2>
-              <p className="mt-3 max-w-2xl text-[15px] leading-7 text-muted-foreground">
-                {copy.writing.intro}
+              <p className="mt-3 max-w-xl text-[15px] leading-7 text-muted-foreground">
+                {copy.home.journalIntro}
               </p>
 
               {posts.length > 0 ? (
                 <>
-                  <ol className="mt-10 border-b border-border">
+                  <ol className="mt-8 border-b border-border">
                     {posts.map((post) => (
                       <li key={post.slug}>
                         <ArticleCard post={post} locale={locale} />
@@ -355,20 +318,20 @@ export function HomePage({ locale }: { locale: Locale }) {
                       href={blogPath(locale)}
                       className="editorial-link font-mono text-[10px] uppercase tracking-[0.16em] text-blood"
                     >
-                      {copy.writing.allPosts} →
+                      {copy.home.allPosts} →
                     </Link>
                   </p>
                 </>
               ) : (
                 <EmptyState
                   indent={false}
-                  label={copy.writing.emptyLabel}
-                  title={copy.writing.emptyTitle}
-                  text={copy.writing.emptyText}
-                  note={copy.writing.emptyNote}
+                  label={copy.blog.emptyLabel}
+                  title={copy.home.journalEmptyTitle}
+                  text={copy.home.journalEmptyText}
+                  note={copy.home.journalEmptyNote}
                   action={{
                     href: blogPath(locale),
-                    label: copy.hero.journalCta,
+                    label: copy.home.allPosts,
                   }}
                 />
               )}

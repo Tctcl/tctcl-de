@@ -1,23 +1,24 @@
 import type { Locale } from "@/lib/locale";
 
-type WorkItem = {
-  title: string;
-  description: string;
-  meta: string;
-};
-
 export type SiteCopy = {
   meta: {
     title: string;
     description: string;
     ogAlt: string;
   };
+  brand: {
+    subtitle: string;
+    aria: string;
+  };
   nav: {
     skip: string;
-    work: string;
-    about: string;
+    home: string;
+    music: string;
+    tinkering: string;
     projects: string;
     journal: string;
+    about: string;
+    work: string;
     main: string;
     language: string;
     switchToEnglish: string;
@@ -25,51 +26,33 @@ export type SiteCopy = {
     currentLanguage: string;
     noTranslation: string;
   };
-  hero: {
+  home: {
     eyebrow: string;
     title: string;
-    titleAccent: string;
-    lead: string;
-    facts: string[];
-    journalCta: string;
-    aboutCta: string;
-    cardTop: string;
-    cardBottom: string;
-    cardLabel: string;
-  };
-  about: {
-    eyebrow: string;
-    title: string;
-    paragraphs: string[];
-    quote: string;
-    asideLabel: string;
-    asideItems: string[];
-  };
-  work: {
-    eyebrow: string;
-    title: string;
-    intro: string;
-    items: WorkItem[];
-  };
-  projects: {
-    eyebrow: string;
-    title: string;
-    intro: string;
-    emptyLabel: string;
-    emptyTitle: string;
-    emptyText: string;
-    emptyNote: string;
-  };
-  writing: {
-    eyebrow: string;
-    title: string;
-    intro: string;
-    emptyLabel: string;
-    emptyTitle: string;
-    emptyText: string;
-    emptyNote: string;
+    accent: string;
+    intro: string[];
+    marginalLabel: string;
+    marginalFacts: {
+      term: string;
+      value: string;
+    }[];
+    marginalNote: string;
+    marginalStamp: string;
+    roomsLabel: string;
+    roomsTitle: string;
+    roomsIntro: string;
+    roomCta: string;
+    nowLabel: string;
+    nowTitle: string;
+    nowIntro: string;
+    journalLabel: string;
+    journalTitle: string;
+    journalIntro: string;
+    journalTags: string[];
+    journalEmptyTitle: string;
+    journalEmptyText: string;
+    journalEmptyNote: string;
     allPosts: string;
-    minRead: string;
   };
   blog: {
     eyebrow: string;
@@ -133,126 +116,77 @@ export type SiteCopy = {
 export const siteCopy: Record<Locale, SiteCopy> = {
   de: {
     meta: {
-      title: "TCTCL Labs — Software, E-Commerce und Experimente",
+      title: "TCTCL — Musik, Software und Dinge dazwischen",
       description:
-        "TCTCL Labs: Entwicklung, Integrationen und Werkzeuge für JTL-Shop, JTL-Wawi und den E-Commerce. Außerdem Musik, Self-Hosting und Dinge, die einfach interessant sind.",
-      ogAlt: "TCTCL Labs — Software, E-Commerce und Experimente",
+        "Persönliche Werkstatt von TCTCL: E-Commerce-Entwicklung, Self-Hosting, Musik und Projekte, die nicht unbedingt ein Produkt werden müssen.",
+      ogAlt: "TCTCL — Musik, Software und Dinge dazwischen",
+    },
+    brand: {
+      subtitle: "Werkstatt",
+      aria: "TCTCL — Startseite",
     },
     nav: {
       skip: "Zum Inhalt springen",
-      work: "Arbeit",
-      about: "Über",
+      home: "Start",
+      music: "Musik",
+      tinkering: "Tüfteln",
       projects: "Projekte",
       journal: "Journal",
+      about: "Über",
+      work: "Arbeit",
       main: "Hauptnavigation",
       language: "Sprache wechseln",
       switchToEnglish: "Zur englischen Version",
       switchToGerman: "Zur deutschen Version",
       currentLanguage: "Aktuelle Sprache",
-      noTranslation: "Keine englische Übersetzung — zum englischen Journal",
+      noTranslation:
+        "Keine englische Übersetzung — zum englischen Journal",
     },
-    hero: {
-      eyebrow: "TCTCL Labs / Software & E-Commerce",
-      title: "Ich baue Software für den Handel.",
-      titleAccent: "Manchmal auch nur, weil sie mich interessiert.",
-      lead: "JTL-Shop, JTL-Wawi, Integrationen, Daten und Web-Anwendungen. Ich arbeite an Systemen, die Dinge zusammenbringen — und an Ideen, die kein Produkt werden müssen.",
-      facts: ["JTL-Shop", "JTL-Wawi", "APIs & Daten", "Linux & Docker"],
-      journalCta: "Ins Journal",
-      aboutCta: "Wer dahinter steckt",
-      cardTop: "ASH / BLOOD",
-      cardBottom: "DE / EN",
-      cardLabel: "INDEX",
-    },
-    about: {
-      eyebrow: "Über",
-      title: "Systeme verstehen, indem man sie auseinandernimmt.",
-      paragraphs: [
-        "Ich bin Entwickler und arbeite an E-Commerce-Systemen — vor allem im JTL-Ökosystem. Dort entstehen Plugins, Anbindungen, Imports und Werkzeuge für Probleme, die in der Dokumentation nicht vorkommen.",
-        "Technik ist für mich weniger Selbstzweck als eine Methode, ein System wirklich zu verstehen. Ich lese Logs, verfolge Daten durch Schnittstellen und baue lieber ein kleines Werkzeug, als denselben Handgriff zum zwanzigsten Mal zu machen.",
-        "Daneben: Musik, DJing, selbst gehostete Dienste und mehr Nebenprojekte als freie Festplatte. Nicht alles davon wird ein Produkt. Manches ist einfach interessant genug.",
+    home: {
+      eyebrow: "TCTCL / persönliche Werkstatt",
+      title: "Musik, Code und",
+      accent: "halbfertige Ideen.",
+      intro: [
+        "Ich bin Entwickler, Tüftler und Musiknerd. Beruflich baue ich E-Commerce-Systeme, meistens im JTL-Umfeld. Daneben hoste ich Kram selbst, nehme Dinge auseinander und baue Werkzeuge, weil mir das vorhandene zu umständlich ist.",
+        "Diese Seite ist meine Werkstatt: ein Ort für Projekte, Musiknotizen, technische Ausflüge und Ideen, die noch nicht wissen, was sie werden wollen. Kein Angebot, kein Content-Plan, keine Anmeldung.",
       ],
-      quote:
-        "Ich mag Systeme, die man verstehen kann. Am liebsten solche, die man selbst gebaut hat.",
-      asideLabel: "Neben dem Terminal",
-      asideItems: ["Musik", "DJing", "Self-Hosting", "Nebenprojekte"],
-    },
-    work: {
-      eyebrow: "Arbeit",
-      title: "Woran ich arbeite",
-      intro:
-        "Keine Leistungsliste mit Buzzwords. Das sind die Bereiche, in denen ich tatsächlich unterwegs bin.",
-      items: [
-        {
-          title: "JTL-Shop",
-          description:
-            "Anpassungen, Plugins und Templates — inklusive der Stellen, an denen das Standardverhalten aufhört und eigene Entscheidungen anfangen.",
-          meta: "Shop / Plugin / Template",
-        },
-        {
-          title: "JTL-Wawi",
-          description:
-            "Anbindungen, API-Zugriffe und Workflows, die Daten zwischen Wawi, Shop und allem dazwischen bewegen.",
-          meta: "Wawi / API / Sync",
-        },
-        {
-          title: "E-Commerce-Automation",
-          description:
-            "Imports, Lieferantendaten, Migrationen und wiederkehrende Handgriffe, die besser ein Skript erledigt.",
-          meta: "Daten / Import / Migration",
-        },
-        {
-          title: "Plugins & Werkzeuge",
-          description:
-            "Kleine und größere Werkzeuge für Probleme, für die es kein fertiges Produkt gibt. Oft entstehen sie genau dort.",
-          meta: "Tooling / CLI / Utilities",
-        },
-        {
-          title: "Webanwendungen",
-          description:
-            "React, TypeScript und Tailwind für die Oberfläche; darunter das, was die Anwendung tatsächlich tun muss.",
-          meta: "React / TypeScript / Tailwind",
-        },
-        {
-          title: "Infrastruktur",
-          description:
-            "Linux, Docker, Server und Self-Hosting. Dinge selbst betreiben, statt sie nur zu deployen.",
-          meta: "Linux / Docker / Self-Hosting",
-        },
+      marginalLabel: "Kurzfassung",
+      marginalFacts: [
+        { term: "Beruflich", value: "E-Commerce / JTL / APIs" },
+        { term: "Privat", value: "Linux, Docker, Self-Hosting" },
+        { term: "Im Kopf", value: "Techno, DJing, Sound System" },
+        { term: "Hier", value: "Notizen, Projekte, Experimente" },
       ],
-    },
-    projects: {
-      eyebrow: "Projekte",
-      title: "Projekte & Experimente",
-      intro:
-        "Neben der Arbeit entstehen Werkzeuge, Experimente und musikalische Umwege. Öffentlich wird hier nur, was tatsächlich existiert.",
-      emptyLabel: "Werkbank / 00",
-      emptyTitle: "Noch nichts ausgestellt.",
-      emptyText:
-        "Die Werkbank ist absichtlich leer. Projekte und Experimente bekommen hier einen Platz, sobald sie öffentlich interessant sind — nicht vorher.",
-      emptyNote:
-        "Wenn du wissen willst, woran ich gerade denke: Das Journal ist der bessere Ort dafür.",
-    },
-    writing: {
-      eyebrow: "Journal",
-      title: "Zuletzt geschrieben",
-      intro:
-        "Technische Notizen, Anleitungen und Dinge, die ich beim Bauen gelernt habe. Keine Content-Maschine.",
-      emptyLabel: "Journal / 00",
-      emptyTitle: "Der erste Beitrag ist noch nicht veröffentlicht.",
-      emptyText:
-        "Das Journal ist technisch fertig: Markdown, Metadaten, Sitemap und alles, was dazugehört. Sobald der erste Text wirklich fertig ist, steht er hier.",
-      emptyNote:
-        "Geplant sind Texte zu JTL-Shop, JTL-Wawi, APIs, Imports und dem Rest des Alltags zwischen Shop und Server.",
+      marginalNote: "Kein Tracking, keine Cookies, kein Newsletter-Popup.",
+      marginalStamp: "offen für Umwege",
+      roomsLabel: "Räume",
+      roomsTitle: "Guck dich um.",
+      roomsIntro:
+        "Jede Ecke hat ihr eigenes Thema. Alles hängt trotzdem irgendwie zusammen.",
+      roomCta: "Raum öffnen",
+      nowLabel: "Notizbrett",
+      nowTitle: "Womit ich mich gerade beschäftige",
+      nowIntro:
+        "Kein Live-Feed und keine erfundenen Statusmeldungen. Eher das, was gerade auf dem Tisch liegt.",
+      journalLabel: "Journal",
+      journalTitle: "Zuletzt geschrieben",
+      journalIntro:
+        "Notizen, Fundstücke und Dinge, die ich mir früher hätte aufschreiben sollen.",
+      journalTags: ["Notizen", "Fundstücke", "Ideen"],
+      journalEmptyTitle: "Noch nichts veröffentlicht.",
+      journalEmptyText:
+        "Das Journal ist eingerichtet. Der erste Text ist noch nicht fertig — und statt einer Platzhalter-Seite bleibt es erstmal leer.",
+      journalEmptyNote:
+        "Sobald etwas veröffentlicht wird, steht es hier, im Journal und in der Sitemap.",
       allPosts: "Alle Beiträge",
-      minRead: "Min. Lesezeit",
     },
     blog: {
       eyebrow: "Journal",
-      title: "Notizen zwischen Shop und Server.",
+      title: "Notizen aus der Werkstatt.",
       description:
-        "Technische Texte über JTL, E-Commerce, Integrationen und den täglichen Umgang mit Daten. Geschrieben, wenn es etwas zu sagen gibt.",
+        "Notizen, Fundstücke und technische Ausflüge: Musik, Software, Self-Hosting und alles dazwischen.",
       intro:
-        "Hier landen Dinge, die ich beim Bauen gelernt habe: Anleitungen, Fehlersuchen, Entscheidungen und gelegentlich eine Meinung. Kein Veröffentlichungsplan, keine künstliche Serie.",
+        "Hier landen Dinge, die ich beim Bauen oder Hören gelernt habe: Anleitungen, Fehlersuchen, Meinungen und Notizen, die nirgendwo anders hinpassen. Kein Veröffentlichungsplan, keine künstliche Serie.",
       emptyLabel: "Journal / 00",
       emptyTitle: "Noch nichts veröffentlicht.",
       emptyText:
@@ -262,7 +196,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       countOne: "Beitrag",
       countMany: "Beiträge",
       pageTitle: "Journal — Seite {page}",
-      pageDescription: "Seite {page} des Journals von TCTCL Labs.",
+      pageDescription: "Seite {page} des Journals von TCTCL.",
       previous: "Neuere Beiträge",
       next: "Ältere Beiträge",
       pagination: "Seiten",
@@ -291,18 +225,18 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     notFound: {
       eyebrow: "404",
       title: "Hier ist nichts. Zumindest nicht das.",
-      text: "Die Seite existiert nicht, wurde verschoben oder war nur ein Gerücht. Der Rest des Journals ist noch da.",
+      text: "Die Seite existiert nicht, wurde verschoben oder war nur ein Gerücht. Der Rest der Werkstatt ist noch da.",
       backHome: "Zur Startseite",
       backBlog: "Zum Journal",
       metaTitle: "Seite nicht gefunden",
       metaDescription: "Diese Seite existiert nicht.",
     },
     footer: {
-      tagline: "Software, E-Commerce und Dinge, die niemand angefordert hat.",
+      tagline: "Musik, Software und Dinge dazwischen.",
       navLabel: "Footer-Navigation",
       privacy: "Kein Tracking. Keine Cookies. Kein Banner.",
-      colophon: "Gebaut mit Next.js, Markdown und ohne CMS.",
-      copyright: "TCTCL Labs",
+      colophon: "Next.js, Markdown, kein CMS.",
+      copyright: "TCTCL",
       backToTop: "Nach oben",
     },
     common: {
@@ -311,17 +245,24 @@ export const siteCopy: Record<Locale, SiteCopy> = {
   },
   en: {
     meta: {
-      title: "TCTCL Labs — software, e-commerce and experiments",
+      title: "TCTCL — music, software and things in between",
       description:
-        "TCTCL Labs: development, integrations and tooling for JTL-Shop, JTL-Wawi and e-commerce. Also music, self-hosting and things that are simply interesting.",
-      ogAlt: "TCTCL Labs — software, e-commerce and experiments",
+        "TCTCL's personal workshop: e-commerce development, self-hosting, music and projects that don't have to become products.",
+      ogAlt: "TCTCL — music, software and things in between",
+    },
+    brand: {
+      subtitle: "workshop",
+      aria: "TCTCL — homepage",
     },
     nav: {
       skip: "Skip to content",
-      work: "Work",
-      about: "About",
+      home: "Home",
+      music: "Music",
+      tinkering: "Tinkering",
       projects: "Projects",
       journal: "Journal",
+      about: "About",
+      work: "Work",
       main: "Main navigation",
       language: "Change language",
       switchToEnglish: "Go to the English version",
@@ -329,108 +270,51 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       currentLanguage: "Current language",
       noTranslation: "No German translation — go to the German journal",
     },
-    hero: {
-      eyebrow: "TCTCL Labs / Software & e-commerce",
-      title: "I build software for commerce.",
-      titleAccent: "Sometimes just because it's interesting.",
-      lead: "JTL-Shop, JTL-Wawi, integrations, data and web applications. I work on systems that bring things together — and on ideas that don't need to become products.",
-      facts: ["JTL-Shop", "JTL-Wawi", "APIs & data", "Linux & Docker"],
-      journalCta: "Read the journal",
-      aboutCta: "Who's behind this",
-      cardTop: "ASH / BLOOD",
-      cardBottom: "DE / EN",
-      cardLabel: "INDEX",
-    },
-    about: {
-      eyebrow: "About",
-      title: "Understanding systems by taking them apart.",
-      paragraphs: [
-        "I'm a developer working on e-commerce systems, mostly in the JTL ecosystem. That's where plugins, integrations, imports and tools for the problems that never make it into the docs come from.",
-        "Technology isn't an end in itself for me. It's how I actually understand a system. I read logs, follow data through interfaces, and would rather build a small tool than repeat the same manual step for the twentieth time.",
-        "Beyond that: music, DJing, self-hosted services and more side projects than free disk space. Not all of it becomes a product. Some of it is just interesting enough.",
+    home: {
+      eyebrow: "TCTCL / personal workshop",
+      title: "Music, code and",
+      accent: "half-finished ideas.",
+      intro: [
+        "I'm a developer, tinkerer and music nerd. Professionally I build e-commerce systems, mostly around JTL. On the side I host things myself, take stuff apart and build tools because the existing ones are too clunky.",
+        "This site is my workshop: a place for projects, music notes, technical detours and ideas that haven't decided what they want to be yet. No offer, no content plan, no sign-up.",
       ],
-      quote:
-        "I like systems you can understand. Best of all, the ones you built yourself.",
-      asideLabel: "Outside the terminal",
-      asideItems: ["Music", "DJing", "Self-hosting", "Side projects"],
-    },
-    work: {
-      eyebrow: "Work",
-      title: "What I work on",
-      intro:
-        "No services list full of buzzwords. These are the areas I'm actually working in.",
-      items: [
-        {
-          title: "JTL-Shop",
-          description:
-            "Customisations, plugins and templates — including the point where standard behaviour ends and someone has to make a decision.",
-          meta: "Shop / plugin / template",
-        },
-        {
-          title: "JTL-Wawi",
-          description:
-            "Integrations, API access and workflows that move data between Wawi, the shop and everything in between.",
-          meta: "Wawi / API / sync",
-        },
-        {
-          title: "E-commerce automation",
-          description:
-            "Imports, supplier data, migrations and recurring manual work that is better handled by a script.",
-          meta: "Data / import / migration",
-        },
-        {
-          title: "Plugins & tooling",
-          description:
-            "Small and not-so-small tools for problems that don't have an off-the-shelf product. They often start exactly there.",
-          meta: "Tooling / CLI / utilities",
-        },
-        {
-          title: "Web applications",
-          description:
-            "React, TypeScript and Tailwind on the surface; underneath, whatever the application actually needs to do.",
-          meta: "React / TypeScript / Tailwind",
-        },
-        {
-          title: "Infrastructure",
-          description:
-            "Linux, Docker, servers and self-hosting. Running things yourself instead of only deploying them.",
-          meta: "Linux / Docker / self-hosting",
-        },
+      marginalLabel: "Short version",
+      marginalFacts: [
+        { term: "Work", value: "E-commerce / JTL / APIs" },
+        { term: "Private", value: "Linux, Docker, self-hosting" },
+        { term: "In my head", value: "Techno, DJing, sound systems" },
+        { term: "Here", value: "Notes, projects, experiments" },
       ],
-    },
-    projects: {
-      eyebrow: "Projects",
-      title: "Projects & experiments",
-      intro:
-        "Tools, experiments and musical detours happen alongside the work. Only things that actually exist end up here.",
-      emptyLabel: "Workbench / 00",
-      emptyTitle: "Nothing on display yet.",
-      emptyText:
-        "The workbench is deliberately empty. Projects and experiments get a place here once they're publicly interesting — not before.",
-      emptyNote:
-        "If you want to know what I'm thinking about, the journal is the better place for that.",
-    },
-    writing: {
-      eyebrow: "Journal",
-      title: "Latest writing",
-      intro:
-        "Technical notes, guides and things I learned while building. Not a content machine.",
-      emptyLabel: "Journal / 00",
-      emptyTitle: "The first post isn't published yet.",
-      emptyText:
-        "The journal is technically ready: Markdown, metadata, sitemap and everything else. As soon as the first text is really finished, it will appear here.",
-      emptyNote:
-        "Planned topics include JTL-Shop, JTL-Wawi, APIs, imports and the rest of everyday life between shop and server.",
+      marginalNote: "No tracking, no cookies, no newsletter popup.",
+      marginalStamp: "open to detours",
+      roomsLabel: "Rooms",
+      roomsTitle: "Have a look around.",
+      roomsIntro:
+        "Every corner has its own topic. It all connects anyway.",
+      roomCta: "Open room",
+      nowLabel: "Noticeboard",
+      nowTitle: "What I'm currently messing with",
+      nowIntro:
+        "Not a live feed, not invented status updates. Just what's on the bench right now.",
+      journalLabel: "Journal",
+      journalTitle: "Latest writing",
+      journalIntro:
+        "Notes, finds and things I should have written down earlier.",
+      journalTags: ["Notes", "Finds", "Ideas"],
+      journalEmptyTitle: "Nothing published yet.",
+      journalEmptyText:
+        "The journal is set up. The first post isn't finished — and rather than a placeholder page, it stays empty for now.",
+      journalEmptyNote:
+        "Once something is published, it appears here, in the journal and in the sitemap.",
       allPosts: "All posts",
-      minRead: "min read",
     },
     blog: {
       eyebrow: "Journal",
-      title: "Notes from between shop and server.",
+      title: "Notes from the workshop.",
       description:
-        "Technical writing about JTL, e-commerce, integrations and the daily work with data. Published when there's something worth saying.",
+        "Notes, finds and technical detours: music, software, self-hosting and everything in between.",
       intro:
-        "This is where I put things I learned while building: guides, debugging notes, decisions and occasionally an opinion. No publishing schedule, no artificial series.",
+        "This is where I put things I learned while building or listening: guides, debugging notes, opinions and notes that don't fit anywhere else. No publishing schedule, no artificial series.",
       emptyLabel: "Journal / 00",
       emptyTitle: "Nothing published yet.",
       emptyText:
@@ -440,7 +324,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       countOne: "post",
       countMany: "posts",
       pageTitle: "Journal — page {page}",
-      pageDescription: "Page {page} of the TCTCL Labs journal.",
+      pageDescription: "Page {page} of the TCTCL journal.",
       previous: "Newer posts",
       next: "Older posts",
       pagination: "Pages",
@@ -468,18 +352,18 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     notFound: {
       eyebrow: "404",
       title: "There's nothing here. At least not this.",
-      text: "The page doesn't exist, has moved, or was only a rumour. The rest of the journal is still here.",
+      text: "The page doesn't exist, has moved, or was only a rumour. The rest of the workshop is still here.",
       backHome: "Back to the homepage",
       backBlog: "Go to the journal",
       metaTitle: "Page not found",
       metaDescription: "This page does not exist.",
     },
     footer: {
-      tagline: "Software, e-commerce and things nobody asked for.",
+      tagline: "Music, software and things in between.",
       navLabel: "Footer navigation",
       privacy: "No tracking. No cookies. No banner.",
-      colophon: "Built with Next.js, Markdown and no CMS.",
-      copyright: "TCTCL Labs",
+      colophon: "Next.js, Markdown, no CMS.",
+      copyright: "TCTCL",
       backToTop: "Back to top",
     },
     common: {

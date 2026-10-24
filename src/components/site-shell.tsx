@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 import { getCopy } from "@/content/site-copy";
 import type { Locale } from "@/lib/locale";
+import type { CurrentSection } from "@/lib/routes";
 
 import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
@@ -10,7 +11,7 @@ type SiteShellProps = {
   locale: Locale;
   children: ReactNode;
   alternateHref?: string | null;
-  current?: "home" | "blog" | "article";
+  current?: CurrentSection;
 };
 
 export function SiteShell({

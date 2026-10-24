@@ -1,20 +1,21 @@
 import Link from "next/link";
 
 import { getCopy } from "@/content/site-copy";
-import { sectionIds, type Locale } from "@/lib/locale";
-import { blogPath, homePath } from "@/lib/routes";
+import type { Locale } from "@/lib/locale";
+import { blogPath, homePath, roomPath } from "@/lib/routes";
 import { BUILD_YEAR, SITE } from "@/lib/site";
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const copy = getCopy(locale);
-  const home = homePath(locale);
-  const ids = sectionIds[locale];
 
   const navItems = [
-    { href: `${home}#${ids.work}`, label: copy.nav.work },
-    { href: `${home}#${ids.about}`, label: copy.nav.about },
-    { href: `${home}#${ids.projects}`, label: copy.nav.projects },
+    { href: homePath(locale), label: copy.nav.home },
+    { href: roomPath("music", locale), label: copy.nav.music },
+    { href: roomPath("tinkering", locale), label: copy.nav.tinkering },
+    { href: roomPath("projects", locale), label: copy.nav.projects },
     { href: blogPath(locale), label: copy.nav.journal },
+    { href: roomPath("about", locale), label: copy.nav.about },
+    { href: roomPath("work", locale), label: copy.nav.work },
   ];
 
   return (
@@ -22,15 +23,15 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 md:grid-cols-12 md:px-8">
         <div className="md:col-span-5">
           <p className="font-serif text-xl font-semibold tracking-[-0.02em]">
-            TCTCL <span className="text-blood">Labs</span>
+            TCTCL <span className="text-blood">{copy.brand.subtitle}</span>
           </p>
           <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
             {copy.footer.tagline}
           </p>
         </div>
 
-        <nav aria-label={copy.footer.navLabel} className="md:col-span-3">
-          <ul className="grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-1">
+        <nav aria-label={copy.footer.navLabel} className="md:col-span-4">
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-2">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link

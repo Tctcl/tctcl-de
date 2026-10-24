@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { getCopy } from "@/content/site-copy";
+import { getRoomCopy } from "@/content/rooms";
 import {
   getBlogPageCount,
   getTranslation,
@@ -8,7 +9,13 @@ import {
 } from "@/lib/content";
 import { locales, otherLocale, type Locale } from "@/lib/locale";
 import { defaultOgImage, pageMetadata } from "@/lib/metadata";
-import { blogPagePath, homePath, postPath } from "@/lib/routes";
+import {
+  blogPagePath,
+  homePath,
+  postPath,
+  roomPath,
+  type RoomId,
+} from "@/lib/routes";
 
 export function homeMetadata(locale: Locale): Metadata {
   const copy = getCopy(locale);
@@ -26,6 +33,22 @@ export function homeMetadata(locale: Locale): Metadata {
       ...defaultOgImage(locale),
       alt: copy.meta.ogAlt,
     },
+  });
+}
+
+export function roomMetadata(locale: Locale, room: RoomId): Metadata {
+  const copy = getRoomCopy(locale, room);
+
+  return pageMetadata({
+    locale,
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    path: roomPath(room, locale),
+    alternates: {
+      de: roomPath(room, "de"),
+      en: roomPath(room, "en"),
+    },
+    image: defaultOgImage(locale),
   });
 }
 

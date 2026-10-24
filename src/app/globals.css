@@ -114,6 +114,19 @@ summary {
   text-decoration-color: var(--blood);
 }
 
+.stamp {
+  display: inline-block;
+  border: 1px solid var(--blood);
+  padding: 0.4rem 0.55rem;
+  color: var(--blood);
+  font-family: var(--font-mono-stack);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+}
+
 .skip-link {
   position: fixed;
   left: 1rem;

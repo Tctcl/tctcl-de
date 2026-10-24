@@ -1,11 +1,12 @@
 # tctcl.de
 
-Personal site of TCTCL Labs: German first, English second, built as a fully
-static Next.js site with a Markdown journal.
+Personal workshop of TCTCL: music, tinkering, projects and notes, with the
+professional e-commerce work kept in its own room. German first, English second,
+built as a fully static Next.js site with a Markdown journal.
 
-The design is deliberately restrained: ash paper, charcoal ink, muted rules and
-a single deep red accent. No analytics, no cookies, no forms, no third-party
-scripts.
+The design is deliberately personal and editorial: ash paper, charcoal ink,
+muted rules, a single deep red accent, irregular grids and small hand-made
+marks. No analytics, no cookies, no forms, no third-party scripts.
 
 ## Stack
 
@@ -44,7 +45,12 @@ image alt text.
 
 | German | English | Content |
 | --- | --- | --- |
-| `/` | `/en` | Homepage |
+| `/` | `/en` | Homepage and room directory |
+| `/musik` | `/en/music` | Music room |
+| `/tuefteln` | `/en/tinkering` | Tinkering room |
+| `/projekte` | `/en/projects` | Project workbench and statuses |
+| `/ueber` | `/en/about` | About |
+| `/arbeit` | `/en/work` | Professional work |
 | `/blog` | `/en/blog` | Journal index |
 | `/blog/seite/[page]` | `/en/blog/page/[page]` | Pagination (8 posts per page) |
 | `/blog/[slug]` | `/en/blog/[slug]` | Article |
@@ -73,9 +79,15 @@ documented in [`docs/writing.md`](docs/writing.md).
 Drafts stay in the repository but are excluded from the journal, pagination,
 related articles, the sitemap and the homepage. Their URLs return a real 404.
 
+Room copy lives in `src/content/rooms.ts` (one object per language), the homepage
+noticeboard is hand-edited in `src/content/now.ts`, and global navigation/meta
+copy is in `src/content/site-copy.ts`.
+
 Projects are intentionally an empty, typed list in
-`src/content/projects.ts`. The homepage shows an honest empty state until real,
-public projects are added.
+`src/content/projects.ts`. The workbench shows an honest empty state until real,
+public projects are added. Project entries support a `status` (`building`,
+`experiment`, `paused`, `abandoned`) and optional notes, so unfinished or
+abandoned work can be described as what it is.
 
 ## Structure
 
@@ -83,8 +95,8 @@ public projects are added.
 src/app/(de)/            German routes and root layout
 src/app/(en)/            English routes and root layout
 src/app/global-not-found.tsx   Bilingual fallback 404
-src/components/          Layout, journal and article UI
-src/content/             Site copy (DE/EN) and the project list
+src/components/          Layout, rooms, journal and article UI
+src/content/             Site, room and noticeboard copy (DE/EN), project list
 src/lib/content/         Markdown loader, schema and renderer
 src/lib/                 Routing, SEO, structured data and formatting
 content/blog/            Markdown articles

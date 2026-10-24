@@ -4,7 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "404 — TCTCL Labs",
+  title: "404 — TCTCL",
   description:
     "Diese Seite existiert nicht. This page does not exist.",
   robots: {
@@ -35,7 +35,7 @@ export default function GlobalNotFound() {
               TCTCL
             </Link>
             <span className="font-mono text-[9px] uppercase tracking-[0.32em] text-muted-foreground">
-              Labs
+              Werkstatt
             </span>
           </div>
         </header>
