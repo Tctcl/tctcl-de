@@ -46,14 +46,14 @@ export default function GlobalNotFound() {
           </p>
           <h1 className="mt-5 max-w-2xl font-serif text-[clamp(2.4rem,6vw,4.6rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
             Hier ist nichts.
-            <span className="block italic text-muted-foreground">
+            <span lang="en" className="block italic text-muted-foreground">
               There is nothing here.
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-[15.5px] leading-7 text-muted-foreground">
             Die Seite existiert nicht, wurde verschoben oder war nur ein
             Gerücht.
-            <span className="mt-2 block">
+            <span lang="en" className="mt-2 block">
               The page does not exist, has moved, or was only a rumour.
             </span>
           </p>
