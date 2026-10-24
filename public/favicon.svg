@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="TCTCL Labs">
+  <rect width="64" height="64" fill="#e9e4da"/>
+  <rect width="64" height="5" fill="#8e1d14"/>
+  <rect x="13" y="17" width="38" height="6" fill="#171512"/>
+  <rect x="29" y="17" width="6" height="32" fill="#171512"/>
+  <rect x="45" y="43" width="6" height="6" fill="#8e1d14"/>
+</svg>
