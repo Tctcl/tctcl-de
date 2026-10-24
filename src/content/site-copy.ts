@@ -13,7 +13,6 @@ export type SiteCopy = {
   nav: {
     skip: string;
     home: string;
-    music: string;
     tinkering: string;
     projects: string;
     journal: string;
@@ -128,7 +127,6 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     nav: {
       skip: "Zum Inhalt springen",
       home: "Start",
-      music: "Musik",
       tinkering: "Tüfteln",
       projects: "Projekte",
       journal: "Journal",
@@ -257,7 +255,6 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     nav: {
       skip: "Skip to content",
       home: "Home",
-      music: "Music",
       tinkering: "Tinkering",
       projects: "Projects",
       journal: "Journal",

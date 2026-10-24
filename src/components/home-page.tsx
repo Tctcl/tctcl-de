@@ -24,12 +24,11 @@ type HomeRoom = {
 };
 
 const homeRooms: HomeRoom[] = [
-  { key: "music", span: "md:col-span-7", feature: true },
   { key: "tinkering", span: "md:col-span-5" },
-  { key: "projects", span: "md:col-span-5" },
-  { key: "journal", span: "md:col-span-7" },
-  { key: "about", span: "md:col-span-4" },
-  { key: "work", span: "md:col-span-8" },
+  { key: "projects", span: "md:col-span-7" },
+  { key: "journal", span: "md:col-span-7", feature: true },
+  { key: "about", span: "md:col-span-5" },
+  { key: "work", span: "md:col-span-8 md:col-start-5" },
 ];
 
 export function HomePage({ locale }: { locale: Locale }) {
@@ -134,7 +133,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               const label = isJournal
                 ? copy.nav.journal
                 : (roomData?.label ?? "");
-              const index = isJournal ? "04" : (roomData?.index ?? "");
+              const index = isJournal ? "03" : (roomData?.index ?? "");
               const teaser = isJournal
                 ? copy.home.journalIntro
                 : (roomData?.teaser ?? "");

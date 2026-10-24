@@ -30,7 +30,6 @@ export function SiteHeader({
     href: string;
     label: string;
   }[] = [
-    { key: "music", href: roomPath("music", locale), label: copy.nav.music },
     {
       key: "tinkering",
       href: roomPath("tinkering", locale),

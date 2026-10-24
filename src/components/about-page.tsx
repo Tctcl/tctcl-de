@@ -10,7 +10,6 @@ import { otherLocale, type Locale } from "@/lib/locale";
 import { blogPath, roomPath, type RoomId } from "@/lib/routes";
 
 const roomLinks: (RoomId | "journal")[] = [
-  "music",
   "tinkering",
   "projects",
   "journal",
@@ -161,7 +160,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
                         className="group flex items-baseline justify-between gap-4 border-b border-border/70 py-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-blood"
                       >
                         <span>
-                          {isJournal ? "04" : entry?.index} /{" "}
+                          {isJournal ? "03" : entry?.index} /{" "}
                           {isJournal ? site.nav.journal : entry?.label}
                         </span>
                         <span

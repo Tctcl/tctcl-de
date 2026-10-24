@@ -1,25 +1,7 @@
 type RoomMarkProps = {
-  variant: "music" | "tinkering" | "projects" | "about" | "work" | "journal";
+  variant: "tinkering" | "projects" | "about" | "work" | "journal";
   className?: string;
 };
-
-const waveform = [
-  22, 48, 34, 70, 44, 86, 58, 38, 76, 52, 92, 46, 64, 30, 72, 40,
-];
-
-function MusicMark() {
-  return (
-    <div className="flex h-full items-end gap-[3px]">
-      {waveform.map((height, index) => (
-        <span
-          key={`${height}-${index}`}
-          className={`w-[3px] ${index % 7 === 0 ? "bg-blood" : "bg-ink/55"}`}
-          style={{ height: `${height}%` }}
-        />
-      ))}
-    </div>
-  );
-}
 
 function TinkeringMark() {
   return (
@@ -95,7 +77,6 @@ function JournalMark() {
 export function RoomMark({ variant, className = "" }: RoomMarkProps) {
   return (
     <div aria-hidden="true" className={`h-12 w-20 ${className}`}>
-      {variant === "music" ? <MusicMark /> : null}
       {variant === "tinkering" ? <TinkeringMark /> : null}
       {variant === "projects" ? <ProjectsMark /> : null}
       {variant === "about" ? <AboutMark /> : null}

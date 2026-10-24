@@ -10,7 +10,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
 
   const navItems = [
     { href: homePath(locale), label: copy.nav.home },
-    { href: roomPath("music", locale), label: copy.nav.music },
     { href: roomPath("tinkering", locale), label: copy.nav.tinkering },
     { href: roomPath("projects", locale), label: copy.nav.projects },
     { href: blogPath(locale), label: copy.nav.journal },

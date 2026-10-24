@@ -21,16 +21,6 @@ type RoomBase = {
   metaDescription: string;
 };
 
-export type MusicCopy = RoomBase & {
-  sections: RoomSection[];
-  signal: string[];
-  empty: {
-    label: string;
-    title: string;
-    text: string;
-  };
-};
-
 export type TinkeringCopy = RoomBase & {
   sections: RoomSection[];
   toolkit: {
@@ -77,7 +67,6 @@ export type WorkCopy = RoomBase & {
 };
 
 type RoomCopy = {
-  music: MusicCopy;
   tinkering: TinkeringCopy;
   projects: ProjectsCopy;
   about: AboutCopy;
@@ -86,56 +75,8 @@ type RoomCopy = {
 
 export const roomCopy: Record<Locale, RoomCopy> = {
   de: {
-    music: {
-      index: "01",
-      label: "Musik",
-      eyebrow: "Techno / DJing / Klang",
-      title: "Musik ist kein Nebenpunkt.",
-      accent: "Sie ist ein eigener Raum.",
-      intro:
-        "Elektronische Musik, vor allem Techno und Hard Techno. Ich lege auf, sortiere Tracks und verbringe zu viel Zeit damit, herauszufinden, warum ein Werkzeug etwas anders macht, als es sollte.",
-      teaser:
-        "Techno, DJing und die unglamouröse Technik dahinter: Track-Analyse, Metadaten, Sound System.",
-      tags: ["Techno", "DJing", "Audio"],
-      metaTitle: "Musik",
-      metaDescription:
-        "Techno, DJing, DJ-Werkzeuge, Track-Analyse und der Aufbau eines eigenen Sound Systems.",
-      signal: ["BPM", "KEY", "GRID", "WAVE"],
-      sections: [
-        {
-          title: "Was mich daran reizt",
-          paragraphs: [
-            "Techno ist für mich keine Hintergrundbeschallung. Es geht um Auswahl, Spannung, Druck und darum, einen Raum über Stunden zu halten. Gute Sets sind Handwerk, auch wenn sie nicht so aussehen sollen.",
-            "Ich höre Tracks inzwischen anders: Wo setzt der Kick ein? Wie viel Platz bleibt für alles andere? Funktioniert die Nummer nur laut, oder trägt sie auch leise? Das ist der Punkt, an dem Musik und Technik für mich zusammenfallen.",
-          ],
-        },
-        {
-          title: "Die Werkzeuge dazwischen",
-          paragraphs: [
-            "BPM, Beatgrids, Key Detection, Waveforms, Audioqualität, Metadaten und Bibliotheksverwaltung. Das sind die Details, die niemand sieht, bis sie nerven. Viele Programme können eines davon gut und den Rest halbherzig.",
-            "Irgendwann will ich eine eigene DJ-Musikverwaltung bauen, die diese Dinge ernst nimmt: nachvollziehbar, schnell und ohne dass die Bibliothek nach dem dritten Update auseinanderfällt. Kein fertiges Produkt, erstmal ein Haufen Notizen und Tests.",
-          ],
-        },
-        {
-          title: "Ein eigenes Sound System",
-          paragraphs: [
-            "Subs, Kicks, Mids, Tops, DSP, Endstufen, Treiber, Gehäuse. Ein DIY-System ist eine schöne Mischung aus Holz, Elektronik, Raumakustik und Sturheit. Am Ende kann man hören, ob die Entscheidungen funktioniert haben.",
-            "Das ist kein fertiges Bauprojekt mit Stückliste. Eher eine Richtung, in die ich weiter reinlese und irgendwann tatsächlich säge.",
-          ],
-        },
-        {
-          title: "Musiknotizen",
-          note: "Sobald es hier etwas zu hören oder zu lesen gibt, landet es an dieser Stelle. Vorher bleibt der Platz leer.",
-        },
-      ],
-      empty: {
-        label: "Musiknotizen / 00",
-        title: "Noch keine Tracks oder Mixe veröffentlicht.",
-        text: "Keine erfundenen Releases, keine Playlist als Platzhalter. Wenn es etwas gibt, steht es hier.",
-      },
-    },
     tinkering: {
-      index: "02",
+      index: "01",
       label: "Tüfteln",
       eyebrow: "Linux / Docker / Code / Hardware",
       title: "Erst auseinandernehmen.",
@@ -214,7 +155,7 @@ export const roomCopy: Record<Locale, RoomCopy> = {
       marginal: ["Offene Werkbank", "kein fertiger Plan", "trotzdem weiter"],
     },
     projects: {
-      index: "03",
+      index: "02",
       label: "Projekte",
       eyebrow: "Werkbank / gebaut / halbfertig",
       title: "Nicht alles braucht",
@@ -274,7 +215,7 @@ export const roomCopy: Record<Locale, RoomCopy> = {
       },
     },
     about: {
-      index: "05",
+      index: "04",
       label: "Über",
       eyebrow: "Person / Haltung / ein paar Kanten",
       title: "Ich bin TCTCL.",
@@ -326,7 +267,7 @@ export const roomCopy: Record<Locale, RoomCopy> = {
       ],
     },
     work: {
-      index: "06",
+      index: "05",
       label: "Arbeit",
       eyebrow: "E-Commerce / JTL / Infrastruktur",
       title: "Der berufliche Teil.",
@@ -393,56 +334,8 @@ export const roomCopy: Record<Locale, RoomCopy> = {
     },
   },
   en: {
-    music: {
-      index: "01",
-      label: "Music",
-      eyebrow: "Techno / DJing / sound",
-      title: "Music isn't a side note.",
-      accent: "It gets its own room.",
-      intro:
-        "Electronic music, mostly techno and hard techno. I DJ, sort tracks, and spend too much time figuring out why a tool does something different from what it promised.",
-      teaser:
-        "Techno, DJing and the unglamorous technology behind it: track analysis, metadata, sound systems.",
-      tags: ["Techno", "DJing", "Audio"],
-      metaTitle: "Music",
-      metaDescription:
-        "Techno, DJing, DJ tools, track analysis and building a DIY sound system.",
-      signal: ["BPM", "KEY", "GRID", "WAVE"],
-      sections: [
-        {
-          title: "Why it matters",
-          paragraphs: [
-            "Techno isn't background noise to me. It's selection, tension, pressure, and holding a room for hours. A good set is craft, even when it isn't supposed to look like it.",
-            "I hear tracks differently now: where does the kick land? How much space is left for everything else? Does it only work loud, or does it still carry when it's quiet? That's where music and technology meet for me.",
-          ],
-        },
-        {
-          title: "The tools in between",
-          paragraphs: [
-            "BPM, beatgrids, key detection, waveforms, audio quality, metadata and library management. These are the details nobody notices until they get in the way. Plenty of tools do one of them well and the rest half-heartedly.",
-            "At some point I want to build my own DJ library tool that takes these things seriously: transparent, fast, and not falling apart after the third update. Not a finished product. For now it's a pile of notes and tests.",
-          ],
-        },
-        {
-          title: "A sound system of my own",
-          paragraphs: [
-            "Subs, kicks, mids, tops, DSP, amps, drivers, enclosures. A DIY system is a good mix of wood, electronics, room acoustics and stubbornness. In the end you can hear whether your decisions worked.",
-            "This isn't a finished build with a parts list. It's a direction I keep reading into and will eventually start cutting wood for.",
-          ],
-        },
-        {
-          title: "Music notes",
-          note: "When there is something to hear or read, it will end up here. Until then the space stays empty.",
-        },
-      ],
-      empty: {
-        label: "Music notes / 00",
-        title: "No tracks or mixes published yet.",
-        text: "No invented releases, no playlist as a placeholder. If there's something, it goes here.",
-      },
-    },
     tinkering: {
-      index: "02",
+      index: "01",
       label: "Tinkering",
       eyebrow: "Linux / Docker / code / hardware",
       title: "Take it apart first.",
@@ -521,7 +414,7 @@ export const roomCopy: Record<Locale, RoomCopy> = {
       marginal: ["Open workbench", "no finished plan", "keep going"],
     },
     projects: {
-      index: "03",
+      index: "02",
       label: "Projects",
       eyebrow: "Workbench / built / half-finished",
       title: "Not everything needs",
@@ -585,7 +478,7 @@ export const roomCopy: Record<Locale, RoomCopy> = {
       },
     },
     about: {
-      index: "05",
+      index: "04",
       label: "About",
       eyebrow: "Person / attitude / a few edges",
       title: "I'm TCTCL.",
@@ -637,7 +530,7 @@ export const roomCopy: Record<Locale, RoomCopy> = {
       ],
     },
     work: {
-      index: "06",
+      index: "05",
       label: "Work",
       eyebrow: "E-commerce / JTL / infrastructure",
       title: "The professional part.",

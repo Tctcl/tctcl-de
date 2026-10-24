@@ -46,7 +46,6 @@ image alt text.
 | German | English | Content |
 | --- | --- | --- |
 | `/` | `/en` | Homepage and room directory |
-| `/musik` | `/en/music` | Music room |
 | `/tuefteln` | `/en/tinkering` | Tinkering room |
 | `/projekte` | `/en/projects` | Project workbench and statuses |
 | `/ueber` | `/en/about` | About |

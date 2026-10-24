@@ -2,20 +2,13 @@ import type { Locale } from "./locale";
 
 const prefix = (locale: Locale) => (locale === "de" ? "" : "/en");
 
-export type RoomId = "music" | "tinkering" | "projects" | "about" | "work";
+export type RoomId = "tinkering" | "projects" | "about" | "work";
 
 export type CurrentSection = "home" | "journal" | "article" | RoomId;
 
-export const roomIds: RoomId[] = [
-  "music",
-  "tinkering",
-  "projects",
-  "about",
-  "work",
-];
+export const roomIds: RoomId[] = ["tinkering", "projects", "about", "work"];
 
 const roomPaths: Record<RoomId, Record<Locale, string>> = {
-  music: { de: "/musik", en: "/en/music" },
   tinkering: { de: "/tuefteln", en: "/en/tinkering" },
   projects: { de: "/projekte", en: "/en/projects" },
   about: { de: "/ueber", en: "/en/about" },
