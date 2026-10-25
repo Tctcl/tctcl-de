@@ -1490,7 +1490,7 @@ summary {
 
 .mc-header-tools .theme-switcher-trigger {
   border: 2px solid #1f2d13;
-  background: #6a9c3f;
+  background: #2f4a1c;
   color: #f4f0d8;
   box-shadow: inset -2px -2px 0 #3f5d2a, inset 2px 2px 0 #8fbf5a;
 }
@@ -1501,6 +1501,12 @@ summary {
 
 .mc-header-tools nav a {
   color: #d7e8bd;
+}
+
+.mc-header-tools nav [aria-current] {
+  color: #f8f3dd;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .mc-hotbar {
@@ -1520,7 +1526,7 @@ summary {
   justify-content: center;
   min-height: 3.2rem;
   border: 2px solid #1a2610;
-  background: #6a9c3f;
+  background: #3f5d2a;
   padding: 0.25rem 0.3rem;
   color: #f8f3dd;
   font-family: var(--font-mono-stack);
@@ -1632,7 +1638,7 @@ summary {
 .mc-button {
   display: inline-block;
   border: 3px solid #1f2d13;
-  background: #6a9c3f;
+  background: #3f5d2a;
   padding: 0.5rem 0.75rem;
   color: #f8f3dd;
   font-family: var(--font-mono-stack);
@@ -1690,7 +1696,7 @@ summary {
   flex-direction: column;
   gap: 0.1rem;
   border: 2px solid #3c2a16;
-  background: #8a6a3c;
+  background: #74562f;
   padding: 0.35rem;
   box-shadow: inset 2px 2px 0 #a98451, inset -2px -2px 0 #5f4525;
 }
@@ -1775,7 +1781,7 @@ summary {
   display: flex;
   flex-direction: column;
   border: 3px solid #1f2d13;
-  background: #6a9c3f;
+  background: #3f5d2a;
   padding: 0.8rem;
   color: #f8f3dd;
   text-decoration: none;
@@ -1784,7 +1790,7 @@ summary {
 }
 
 .mc-block:nth-child(2n) {
-  background: #8a6a3c;
+  background: #74562f;
   box-shadow: inset -3px -3px 0 #5f4525, inset 3px 3px 0 #a98451;
 }
 
@@ -2018,7 +2024,7 @@ summary {
 .mc-footer-slots a {
   display: block;
   border: 2px solid #1a2610;
-  background: #6a9c3f;
+  background: #3f5d2a;
   padding: 0.3rem;
   color: #f8f3dd;
   font-family: var(--font-mono-stack);
@@ -2031,6 +2037,16 @@ summary {
 
 .mc-footer-switcher {
   margin-top: 0.7rem;
+}
+
+.mc-footer-switcher .theme-switcher-trigger {
+  border-color: #1a2610;
+  background: #3f5d2a;
+  color: #d7e8bd;
+}
+
+.mc-footer-switcher .theme-switcher-current {
+  color: #f8f3dd;
 }
 
 .mc-footer-legal {
@@ -2066,7 +2082,7 @@ summary {
   align-items: center;
   gap: 0.35rem;
   border: 2px solid #1f2d13;
-  background: #6a9c3f;
+  background: #3f5d2a;
   padding: 0.3rem 0.45rem;
   color: #f8f3dd;
   font-family: var(--font-mono-stack);
@@ -2246,7 +2262,7 @@ summary {
 
 .shop-breadcrumb span {
   margin: 0 0.4rem;
-  color: #98a2b3;
+  color: #667085;
 }
 
 .shop-hero {
@@ -2563,7 +2579,7 @@ summary {
 }
 
 .shop-card-sku {
-  color: #98a2b3;
+  color: #667085;
   font-size: 0.55rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -3211,7 +3227,7 @@ summary {
 }
 
 .hype-card-index {
-  color: #a78bfa;
+  color: #7c3aed;
   font-size: 0.62rem;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -3234,7 +3250,7 @@ summary {
 
 .hype-card-tags {
   margin-top: 0.45rem;
-  color: #8b7aa1;
+  color: #6b5b80;
   font-size: 0.58rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3286,7 +3302,7 @@ summary {
 }
 
 .hype-roadmap-index {
-  color: #a78bfa;
+  color: #7c3aed;
   font-size: 0.7rem;
   font-weight: 800;
 }
@@ -3299,7 +3315,7 @@ summary {
 
 .hype-roadmap-tag {
   margin-top: 0.1rem;
-  color: #8b7aa1;
+  color: #6b5b80;
   font-size: 0.58rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -3522,7 +3538,7 @@ summary {
 }
 
 .room-flavor.flavor-hype dt {
-  color: #8b7aa1;
+  color: #6b5b80;
   font-size: 0.58rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;

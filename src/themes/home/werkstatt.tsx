@@ -130,12 +130,12 @@ export function WerkstattHome({ locale, theme }: ThemeHomeProps) {
                     className={`group relative flex flex-col justify-between overflow-hidden bg-ink p-6 text-background transition-colors hover:bg-[#221f1b] sm:p-8 md:min-h-[21rem] ${spans[room.key]}`}
                   >
                     <div className="flex items-start justify-between gap-6">
-                      <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#c85a4a]">
+                      <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#e07a6a]">
                         {room.index} / {room.label}
                       </p>
                       <span
                         aria-hidden="true"
-                        className="font-mono text-sm text-[#c85a4a] transition-transform group-hover:translate-x-1"
+                        className="font-mono text-sm text-[#e07a6a] transition-transform group-hover:translate-x-1"
                       >
                         ↗
                       </span>
