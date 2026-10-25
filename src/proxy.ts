@@ -39,6 +39,15 @@ function noStore(response: NextResponse): NextResponse {
   return response;
 }
 
+// Crawlers do not keep cookies, so randomising their style would hand them a
+// different page on every visit and fill their crawl budget with variants.
+const crawlerPattern =
+  /bot\b|crawler|spider|slurp|facebookexternalhit|embedly|quora link preview|pinterest|whatsapp|telegrambot|discordbot|google-inspectiontool|lighthouse|headlesschrome|curl\/|wget\/|python-requests|axios\//i;
+
+function isCrawler(request: NextRequest): boolean {
+  return crawlerPattern.test(request.headers.get("user-agent") ?? "");
+}
+
 /**
  * The theme lives in a first-party cookie and is selected before the page is
  * served. Statically generated theme variants are rewritten onto the clean
@@ -73,8 +82,10 @@ export function proxy(request: NextRequest) {
   }
 
   const cookieTheme = request.cookies.get(THEME_COOKIE)?.value;
-  const needsTheme = !isThemeId(cookieTheme);
-  const theme = isThemeId(cookieTheme) ? cookieTheme : pickRandomTheme();
+  const knownTheme = isThemeId(cookieTheme) ? cookieTheme : null;
+  const theme: ThemeId =
+    knownTheme ?? (isCrawler(request) ? defaultTheme : pickRandomTheme());
+  const needsTheme = !knownTheme && theme !== defaultTheme;
 
   const cleanSuffix =
     pathname === prefix || pathname === `${prefix}/`

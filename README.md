@@ -144,9 +144,16 @@ Because the public URL never changes, links and canonicals stay stable.
 These internal routes are implementation details:
 
 - `robots.txt` disallows `/themes/` and `/en/themes/`
-- The internal pages are `noindex` and canonical to the clean URL
+- A direct visit to an internal path is a 307 to the clean URL, never a page
+- The rewritten pages are canonical to the clean URL, so the public page stays
+  indexable. Do **not** put `noindex` in the internal metadata: the rewrite
+  serves that same metadata on the clean URL.
 - They are excluded from the sitemap and from every public surface
 - `dynamicParams = false`, so only the prebuilt variants exist
+
+Crawlers never receive the random style. Requests without the cookie and with a
+crawler user agent get the default Werkstatt variant and no `Set-Cookie`, so a
+crawl stays stable. Social preview fetchers are covered by the same rule.
 
 The 404 page renders the default Werkstatt chrome, because a static 404 cannot
 read the cookie.
@@ -218,11 +225,14 @@ room-flavor.tsx          Per-style note between room hero and shared body
 - JSON-LD for `Person`, `WebSite`, `Blog`, `BlogPosting` and `BreadcrumbList`
 - Static generation for every public route, including articles
 - Real 404 responses for unknown routes, drafts and invalid page numbers
-- Internal style variants are `noindex`, canonical to the clean URL, absent from
-  the sitemap and disallowed in `robots.txt`
+- Internal style paths are disallowed in `robots.txt`, redirect to the clean URL
+  and are absent from the sitemap; the rewritten clean URL keeps its normal
+  indexable metadata and canonical
+- Crawlers get the default style without a style cookie, so the crawled page is
+  stable
 - Drafts are absent from every public surface
-- The style gallery is a normal indexable page; the seven variants behind it are
-  not
+- The style gallery is a normal indexable page; every style is served under that
+  same URL
 
 Metadata, titles, descriptions and OG images never vary by style. The style
 cookie only changes presentation, so crawlers and shares always see the same

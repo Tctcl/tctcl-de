@@ -178,15 +178,15 @@ export async function themeInternalMetadata({
   const base = baseMetadata(locale, resolved);
   const canonical = cleanPathFor(locale, resolved);
 
+  // No `noindex` here: these pages are rewritten onto the clean public URLs, so
+  // the robots directive would end up on the indexable page. The internal paths
+  // are never rendered directly either — the proxy 307s them to the clean URL,
+  // and robots.txt keeps crawlers out of the prefix.
   return {
     ...base,
     alternates: {
       ...base.alternates,
       canonical,
-    },
-    robots: {
-      index: false,
-      follow: true,
     },
   };
 }
