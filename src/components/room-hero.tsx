@@ -1,17 +1,20 @@
 import { RoomMark } from "@/components/room-mark";
 import { SectionLabel } from "@/components/section-label";
-import { getRoomCopy } from "@/content/rooms";
 import type { Locale } from "@/lib/locale";
 import type { RoomId } from "@/lib/routes";
+import { defaultTheme, type ThemeId } from "@/lib/theme-ids";
+import { getThemeRoomCopy } from "@/themes/copy";
 
 export function RoomHero({
   locale,
   room,
+  theme = defaultTheme,
 }: {
   locale: Locale;
   room: RoomId;
+  theme?: ThemeId;
 }) {
-  const copy = getRoomCopy(locale, room);
+  const copy = getThemeRoomCopy(locale, room, theme);
 
   return (
     <header className="border-b border-border">

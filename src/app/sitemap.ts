@@ -11,6 +11,7 @@ import {
   postPath,
   roomIds,
   roomPath,
+  stylePath,
 } from "@/lib/routes";
 import { absoluteUrl } from "@/lib/site";
 
@@ -59,6 +60,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       });
     }
+
+    entries.push({
+      url: absoluteUrl(stylePath(locale)),
+      changeFrequency: "monthly",
+      priority: 0.6,
+      alternates: {
+        languages: {
+          de: absoluteUrl(stylePath("de")),
+          en: absoluteUrl(stylePath("en")),
+        },
+      },
+    });
 
     const pageCount = getBlogPageCount(locale);
 

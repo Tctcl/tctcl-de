@@ -8,7 +8,7 @@ export type RoomSection = {
   note?: string;
 };
 
-type RoomBase = {
+export type RoomBase = {
   index: string;
   label: string;
   eyebrow: string;
@@ -66,7 +66,7 @@ export type WorkCopy = RoomBase & {
   closing: string;
 };
 
-type RoomCopy = {
+export type RoomCopy = {
   tinkering: TinkeringCopy;
   projects: ProjectsCopy;
   about: AboutCopy;

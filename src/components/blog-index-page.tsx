@@ -6,7 +6,6 @@ import { EmptyState } from "@/components/empty-state";
 import { JsonLd } from "@/components/json-ld";
 import { SectionLabel } from "@/components/section-label";
 import { SiteShell } from "@/components/site-shell";
-import { getCopy } from "@/content/site-copy";
 import {
   getBlogPageCount,
   getPostsForPage,
@@ -15,14 +14,21 @@ import {
 import { otherLocale, type Locale } from "@/lib/locale";
 import { blogPagePath, blogPath } from "@/lib/routes";
 import { blogStructuredData } from "@/lib/structured-data";
+import { defaultTheme, type ThemeId } from "@/lib/theme-ids";
+import { getThemeCopy } from "@/themes/copy";
 
 type BlogIndexPageProps = {
   locale: Locale;
   page: number;
+  theme?: ThemeId;
 };
 
-export function BlogIndexPage({ locale, page }: BlogIndexPageProps) {
-  const copy = getCopy(locale);
+export function BlogIndexPage({
+  locale,
+  page,
+  theme = defaultTheme,
+}: BlogIndexPageProps) {
+  const copy = getThemeCopy(locale, theme);
   const pageCount = getBlogPageCount(locale);
 
   if (!Number.isInteger(page) || page < 1 || page > pageCount) {
@@ -47,7 +53,12 @@ export function BlogIndexPage({ locale, page }: BlogIndexPageProps) {
   const intro = page === 1 ? copy.blog.intro : copy.blog.description;
 
   return (
-    <SiteShell locale={locale} alternateHref={alternateHref} current="journal">
+    <SiteShell
+      locale={locale}
+      alternateHref={alternateHref}
+      current="journal"
+      theme={theme}
+    >
       <JsonLd id="blog-jsonld" data={blogStructuredData(locale)} />
 
       <section className="mx-auto max-w-6xl px-5 pb-12 pt-12 sm:pt-16 md:px-8">

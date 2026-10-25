@@ -14,6 +14,7 @@ import {
   homePath,
   postPath,
   roomPath,
+  stylePath,
   type RoomId,
 } from "@/lib/routes";
 
@@ -73,6 +74,26 @@ export function blogIndexMetadata(locale: Locale, page: number): Metadata {
       : copy.blog.pageDescription.replace("{page}", String(page)),
     path: blogPagePath(locale, page),
     alternates,
+    image: defaultOgImage(locale),
+  });
+}
+
+export function styleGalleryMetadata(locale: Locale): Metadata {
+  return pageMetadata({
+    locale,
+    title:
+      locale === "de"
+        ? "Stile — sieben Werkstätten"
+        : "Styles — seven workshops",
+    description:
+      locale === "de"
+        ? "Alle Stile der TCTCL-Werkstatt: Konsole, Minecraft, JTL Nova, Hype, Retro 90s und Papier."
+        : "All TCTCL workshop styles: Terminal, Minecraft, JTL Nova, Hype, Retro 90s and Paper.",
+    path: stylePath(locale),
+    alternates: {
+      de: stylePath("de"),
+      en: stylePath("en"),
+    },
     image: defaultOgImage(locale),
   });
 }

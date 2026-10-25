@@ -81,7 +81,7 @@ export default function GlobalNotFound() {
 
         <footer className="border-t border-border">
           <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-4 font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-8">
-            <p>Kein Tracking. Keine Cookies. Kein Banner.</p>
+            <p>Ein Cookie für den Stil. Kein Tracking. Kein Banner.</p>
             <p>tctcl.de</p>
           </div>
         </footer>

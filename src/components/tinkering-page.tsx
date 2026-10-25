@@ -2,12 +2,20 @@ import { RoomHero } from "@/components/room-hero";
 import { RoomSectionContent } from "@/components/room-section";
 import { SectionLabel } from "@/components/section-label";
 import { SiteShell } from "@/components/site-shell";
-import { getRoomCopy } from "@/content/rooms";
 import { otherLocale, type Locale } from "@/lib/locale";
 import { roomPath } from "@/lib/routes";
+import { defaultTheme, type ThemeId } from "@/lib/theme-ids";
+import { getThemeRoomCopy } from "@/themes/copy";
+import { RoomFlavor } from "@/themes/room-flavor";
 
-export function TinkeringPage({ locale }: { locale: Locale }) {
-  const copy = getRoomCopy(locale, "tinkering");
+export function TinkeringPage({
+  locale,
+  theme = defaultTheme,
+}: {
+  locale: Locale;
+  theme?: ThemeId;
+}) {
+  const copy = getThemeRoomCopy(locale, "tinkering", theme);
   const alternateHref = roomPath("tinkering", otherLocale(locale));
 
   return (
@@ -15,8 +23,10 @@ export function TinkeringPage({ locale }: { locale: Locale }) {
       locale={locale}
       alternateHref={alternateHref}
       current="tinkering"
+      theme={theme}
     >
-      <RoomHero locale={locale} room="tinkering" />
+      <RoomHero locale={locale} room="tinkering" theme={theme} />
+      <RoomFlavor locale={locale} room="tinkering" theme={theme} />
 
       <section
         aria-labelledby="tinkering-start"

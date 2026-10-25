@@ -4,12 +4,20 @@ import { RoomSectionContent } from "@/components/room-section";
 import { SectionLabel } from "@/components/section-label";
 import { SiteShell } from "@/components/site-shell";
 import { projects } from "@/content/projects";
-import { getRoomCopy } from "@/content/rooms";
 import { otherLocale, type Locale } from "@/lib/locale";
 import { roomPath } from "@/lib/routes";
+import { defaultTheme, type ThemeId } from "@/lib/theme-ids";
+import { getThemeRoomCopy } from "@/themes/copy";
+import { RoomFlavor } from "@/themes/room-flavor";
 
-export function ProjectsPage({ locale }: { locale: Locale }) {
-  const copy = getRoomCopy(locale, "projects");
+export function ProjectsPage({
+  locale,
+  theme = defaultTheme,
+}: {
+  locale: Locale;
+  theme?: ThemeId;
+}) {
+  const copy = getThemeRoomCopy(locale, "projects", theme);
   const alternateHref = roomPath("projects", otherLocale(locale));
 
   return (
@@ -17,8 +25,10 @@ export function ProjectsPage({ locale }: { locale: Locale }) {
       locale={locale}
       alternateHref={alternateHref}
       current="projects"
+      theme={theme}
     >
-      <RoomHero locale={locale} room="projects" />
+      <RoomHero locale={locale} room="projects" theme={theme} />
+      <RoomFlavor locale={locale} room="projects" theme={theme} />
 
       <section
         aria-labelledby="projects-kinds"

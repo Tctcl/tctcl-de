@@ -4,10 +4,11 @@ import { RoomHero } from "@/components/room-hero";
 import { RoomSectionContent } from "@/components/room-section";
 import { SectionLabel } from "@/components/section-label";
 import { SiteShell } from "@/components/site-shell";
-import { getRoomCopy } from "@/content/rooms";
-import { getCopy } from "@/content/site-copy";
 import { otherLocale, type Locale } from "@/lib/locale";
 import { blogPath, roomPath, type RoomId } from "@/lib/routes";
+import { defaultTheme, type ThemeId } from "@/lib/theme-ids";
+import { getThemeCopy, getThemeRoomCopy } from "@/themes/copy";
+import { RoomFlavor } from "@/themes/room-flavor";
 
 const roomLinks: (RoomId | "journal")[] = [
   "tinkering",
@@ -16,14 +17,26 @@ const roomLinks: (RoomId | "journal")[] = [
   "work",
 ];
 
-export function AboutPage({ locale }: { locale: Locale }) {
-  const copy = getRoomCopy(locale, "about");
-  const site = getCopy(locale);
+export function AboutPage({
+  locale,
+  theme = defaultTheme,
+}: {
+  locale: Locale;
+  theme?: ThemeId;
+}) {
+  const copy = getThemeRoomCopy(locale, "about", theme);
+  const site = getThemeCopy(locale, theme);
   const alternateHref = roomPath("about", otherLocale(locale));
 
   return (
-    <SiteShell locale={locale} alternateHref={alternateHref} current="about">
-      <RoomHero locale={locale} room="about" />
+    <SiteShell
+      locale={locale}
+      alternateHref={alternateHref}
+      current="about"
+      theme={theme}
+    >
+      <RoomHero locale={locale} room="about" theme={theme} />
+      <RoomFlavor locale={locale} room="about" theme={theme} />
 
       <section
         aria-labelledby="about-work"
@@ -148,7 +161,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
               <ul className="mt-6 grid gap-x-8 gap-y-3 border-t border-border pt-5 sm:grid-cols-2">
                 {roomLinks.map((room) => {
                   const isJournal = room === "journal";
-                  const entry = isJournal ? null : getRoomCopy(locale, room);
+                  const entry = isJournal ? null : getThemeRoomCopy(locale, room, theme);
                   const href = isJournal
                     ? blogPath(locale)
                     : roomPath(room, locale);

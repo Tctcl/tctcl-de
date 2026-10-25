@@ -2,17 +2,31 @@ import { RoomHero } from "@/components/room-hero";
 import { RoomSectionContent } from "@/components/room-section";
 import { SectionLabel } from "@/components/section-label";
 import { SiteShell } from "@/components/site-shell";
-import { getRoomCopy } from "@/content/rooms";
 import { otherLocale, type Locale } from "@/lib/locale";
 import { roomPath } from "@/lib/routes";
+import { defaultTheme, type ThemeId } from "@/lib/theme-ids";
+import { getThemeRoomCopy } from "@/themes/copy";
+import { RoomFlavor } from "@/themes/room-flavor";
 
-export function WorkPage({ locale }: { locale: Locale }) {
-  const copy = getRoomCopy(locale, "work");
+export function WorkPage({
+  locale,
+  theme = defaultTheme,
+}: {
+  locale: Locale;
+  theme?: ThemeId;
+}) {
+  const copy = getThemeRoomCopy(locale, "work", theme);
   const alternateHref = roomPath("work", otherLocale(locale));
 
   return (
-    <SiteShell locale={locale} alternateHref={alternateHref} current="work">
-      <RoomHero locale={locale} room="work" />
+    <SiteShell
+      locale={locale}
+      alternateHref={alternateHref}
+      current="work"
+      theme={theme}
+    >
+      <RoomHero locale={locale} room="work" theme={theme} />
+      <RoomFlavor locale={locale} room="work" theme={theme} />
 
       <section
         aria-labelledby="work-areas"
