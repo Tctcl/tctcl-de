@@ -32,7 +32,8 @@
   --radius-lg: 4px;
 }
 
-:root {
+:root,
+[data-theme="werkstatt"] {
   --background: #e9e4da;
   --foreground: #171512;
   --card: #efebe2;

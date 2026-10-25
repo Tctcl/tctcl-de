@@ -1,8 +1,9 @@
 import Link from "next/link";
 
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { projects } from "@/content/projects";
 import type { Locale } from "@/lib/locale";
-import { blogPath, homePath, roomPath } from "@/lib/routes";
+import { blogPath, homePath, roomIds, roomPath } from "@/lib/routes";
 import { BUILD_YEAR, SITE } from "@/lib/site";
 import type { ThemeId } from "@/lib/theme-ids";
 import { interfaceCopy, themeChrome } from "@/themes/chrome";
@@ -132,10 +133,10 @@ export function SiteFooter({
       <footer className="hype-footer">
         <div className="hype-footer-stats">
           <p>
-            <strong>5</strong> {chrome.rooms}
+            <strong>{roomIds.length + 1}</strong> {chrome.rooms}
           </p>
           <p>
-            <strong>0</strong> {chrome.projects}
+            <strong>{projects.length}</strong> {chrome.projects}
           </p>
           <p>
             <strong>0</strong> {chrome.trackingCookies}

@@ -87,8 +87,8 @@ export function styleGalleryMetadata(locale: Locale): Metadata {
         : "Styles — seven workshops",
     description:
       locale === "de"
-        ? "Alle Stile der TCTCL-Werkstatt: Konsole, Minecraft, JTL Nova, Hype, Retro 90s und Papier."
-        : "All TCTCL workshop styles: Terminal, Minecraft, JTL Nova, Hype, Retro 90s and Paper.",
+        ? "Alle Stile der TCTCL-Werkstatt: Werkstatt, Konsole, Minecraft, JTL Nova, Hype, Retro 90s und Papier."
+        : "All TCTCL workshop styles: Workshop, Terminal, Minecraft, JTL Nova, Hype, Retro 90s and Paper.",
     path: stylePath(locale),
     alternates: {
       de: stylePath("de"),

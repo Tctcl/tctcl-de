@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ArticleCard } from "@/components/article-card";
 import { SiteShell } from "@/components/site-shell";
+import { projects } from "@/content/projects";
 import { homePath } from "@/lib/routes";
 import { themeChrome } from "@/themes/chrome";
 import type { ThemeHomeProps } from "@/themes/types";
@@ -12,7 +13,7 @@ export function HypeHome({ locale, theme }: ThemeHomeProps) {
   const { copy, posts, now, hotbar } = getHomeData(locale, theme);
   const alternateHref = homePath(locale === "de" ? "en" : "de");
   const chrome = themeChrome.hype[locale];
-  const projectCount = 0;
+  const projectCount = projects.length;
 
   return (
     <SiteShell locale={locale} alternateHref={alternateHref} current="home" theme={theme}>
@@ -53,7 +54,7 @@ export function HypeHome({ locale, theme }: ThemeHomeProps) {
           aria-label={chrome.metricsAria}
         >
           <div>
-            <strong>5</strong>
+            <strong>{hotbar.length}</strong>
             <span>{chrome.rooms}</span>
           </div>
           <div>

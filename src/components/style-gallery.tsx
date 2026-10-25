@@ -43,7 +43,7 @@ export function StyleGallery({
   theme?: ThemeId;
 }) {
   const text = copy[locale];
-  const alternateHref = homePath(locale === "de" ? "en" : "de");
+  const alternateHref = stylePath(locale === "de" ? "en" : "de");
 
   return (
     <SiteShell
@@ -109,13 +109,12 @@ export function StyleGallery({
 
                     <div className="style-card-actions">
                       {active ? (
-                        <Link
-                          href={stylePath(locale)}
+                        <span
                           className="style-card-button style-card-button--active"
                           aria-current="page"
                         >
                           {text.active}
-                        </Link>
+                        </span>
                       ) : (
                         <a
                           href={themeSwitchPath(

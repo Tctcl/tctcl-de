@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 
 import { ArticlePage } from "@/components/article-page";
@@ -30,7 +30,12 @@ import {
   roomMetadata,
   styleGalleryMetadata,
 } from "@/lib/seo";
-import { themeIds, type ThemeId } from "@/lib/theme-ids";
+import {
+  defaultTheme,
+  themeIds,
+  type ThemeId,
+} from "@/lib/theme-ids";
+import { themeCatalogById } from "@/themes/catalog";
 
 export type ThemeRouteParams = {
   theme: string;
@@ -183,6 +188,26 @@ export async function themeInternalMetadata({
       index: false,
       follow: true,
     },
+  };
+}
+
+/**
+ * Dark styles need a matching browser chrome and native control scheme.
+ * The values come from the style catalog so they stay in one place.
+ */
+export async function themeInternalViewport({
+  params,
+}: {
+  params: Promise<ThemeRouteParams>;
+}): Promise<Viewport> {
+  const { theme } = await params;
+  const entry = themeCatalogById[isTheme(theme) ? theme : defaultTheme];
+
+  return {
+    width: "device-width",
+    initialScale: 1,
+    themeColor: entry.themeColor,
+    colorScheme: entry.colorScheme,
   };
 }
 
