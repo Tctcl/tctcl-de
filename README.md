@@ -104,7 +104,7 @@ not just a palette:
 | Werkstatt | The default: ash, ink, paper, editorial grids |
 | Konsole | Terminal, boot log, `ls`-style rooms |
 | Minecraft | Blocky workshop with hotbar and inventory |
-| JTL Nova | Storefront parody with product cards and product details |
+| JTL Nova | Light storefront in the shape of JTL Shop NOVA: utility bar, category sidebar, product-like cards, no cart |
 | Hype | Startup satire with real numbers and a visible satire label |
 | Retro 90s | Under construction, hit counter, guestbook jokes |
 | Papier | Dossier, footnotes, two columns |
@@ -113,6 +113,11 @@ All seven are selectable in the header, in the footer and in the gallery at
 [`/stile`](https://tctcl.de/stile) and `/en/styles`. The switcher is a native
 `<dialog>`; each style is an ordinary anchor to an internal path, so no
 client-side theme state or data fetching is involved.
+
+JTL Nova borrows the layout language of the NOVA template — utility bar,
+category sidebar, product-like cards, light surfaces and a yellow accent — but
+uses no template assets. Its Open Sans/Montserrat stack falls back to the system
+sans until a webfont decision is made.
 
 ### Selection and persistence
 

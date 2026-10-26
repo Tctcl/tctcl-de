@@ -3,9 +3,15 @@ import Link from "next/link";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { projects } from "@/content/projects";
 import type { Locale } from "@/lib/locale";
-import { blogPath, homePath, roomIds, roomPath } from "@/lib/routes";
+import {
+  blogPath,
+  homePath,
+  roomIds,
+  roomPath,
+  stylePath,
+} from "@/lib/routes";
 import { BUILD_YEAR, SITE } from "@/lib/site";
-import type { ThemeId } from "@/lib/theme-ids";
+import { themeIds, type ThemeId } from "@/lib/theme-ids";
 import { interfaceCopy, themeChrome } from "@/themes/chrome";
 import { getThemeCopy } from "@/themes/copy";
 
@@ -93,35 +99,88 @@ export function SiteFooter({
     const chrome = themeChrome["jtl-nova"][locale];
 
     return (
-      <footer className="shop-footer">
-        <div className="shop-footer-grid">
-          <div className="shop-footer-brand">
-            <p>
-              TCTCL <span>{copy.brand.subtitle}</span>
-            </p>
-            <p>{copy.footer.tagline}</p>
-          </div>
-
-          <div className="shop-footer-column">
-            <p className="shop-footer-heading">{chrome.catalog}</p>
-            <FooterLinks locale={locale} theme={theme} className="shop-footer-nav" />
-          </div>
-
-          <div className="shop-footer-column">
-            <p className="shop-footer-heading">{chrome.service}</p>
-            <ul className="shop-footer-service">
-              <li>{chrome.noCart}</li>
-              <li>{chrome.noPrices}</li>
-              <li>{chrome.noShipping}</li>
-              <li>{chrome.styleCookie}</li>
-            </ul>
-            {switcher}
+      <footer className="nova-footer">
+        <div className="nova-newsletter">
+          <div className="nova-container nova-newsletter-row">
+            <div>
+              <h2 className="nova-newsletter-title">{chrome.newsletterTitle}</h2>
+              <p className="nova-newsletter-text">{chrome.newsletterText}</p>
+            </div>
+            <div className="nova-newsletter-action">
+              <Link href={blogPath(locale)} className="nova-button">
+                {chrome.newsletterCta} <span aria-hidden="true">→</span>
+              </Link>
+              <p className="nova-newsletter-note">{chrome.newsletterNote}</p>
+            </div>
           </div>
         </div>
-        <p className="shop-footer-legal">
-          © {BUILD_YEAR} {copy.footer.copyright} ·{" "}
-          {SITE.url.replace("https://", "")} · {copy.footer.colophon}
-        </p>
+
+        <div className="nova-footer-boxes">
+          <div className="nova-container nova-footer-grid">
+            <div className="nova-footer-about">
+              <p className="nova-footer-brand">
+                <span className="nova-mark nova-mark--small" aria-hidden="true">
+                  T
+                </span>
+                tctcl
+              </p>
+              <p className="nova-footer-tagline">{copy.footer.tagline}</p>
+              <p className="nova-footer-note">{chrome.sidebarNote}</p>
+            </div>
+
+            <div className="nova-footer-col">
+              <p className="nova-footer-heading">{chrome.catalog}</p>
+              <nav
+                aria-label={chrome.catalog}
+                className="nova-footer-links"
+              >
+                <Link href={homePath(locale)}>{copy.nav.home}</Link>
+                <Link href={roomPath("tinkering", locale)}>
+                  {copy.nav.tinkering}
+                </Link>
+                <Link href={roomPath("projects", locale)}>
+                  {copy.nav.projects}
+                </Link>
+                <Link href={roomPath("about", locale)}>{copy.nav.about}</Link>
+                <Link href={roomPath("work", locale)}>{copy.nav.work}</Link>
+              </nav>
+            </div>
+
+            <div className="nova-footer-col">
+              <p className="nova-footer-heading">{chrome.journal}</p>
+              <nav
+                aria-label={chrome.journal}
+                className="nova-footer-links"
+              >
+                <Link href={blogPath(locale)}>{copy.nav.journal}</Link>
+                <Link href={stylePath(locale)}>
+                  {chrome.styles} ({themeIds.length})
+                </Link>
+              </nav>
+            </div>
+
+            <div className="nova-footer-col">
+              <p className="nova-footer-heading">{chrome.service}</p>
+              <ul className="nova-footer-service">
+                <li>{chrome.noCart}</li>
+                <li>{chrome.noPrices}</li>
+                <li>{chrome.noShipping}</li>
+                <li>{chrome.styleCookie}</li>
+              </ul>
+              <div className="nova-footer-switcher">{switcher}</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="nova-footer-legal">
+          <div className="nova-container nova-footer-legal-inner">
+            <p>
+              © {BUILD_YEAR} {copy.footer.copyright} ·{" "}
+              {SITE.url.replace("https://", "")}
+            </p>
+            <p>{chrome.disclaimer}</p>
+          </div>
+        </div>
       </footer>
     );
   }

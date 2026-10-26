@@ -71,7 +71,7 @@ export const themeCopy: ThemeCopyTable = {
         eyebrow: "journal/",
         title: "Notizen aus der Werkstatt.",
         intro:
-          "Hier landen Dinge, die ich beim Bauen oder Hören gelernt habe: Anleitungen, Fehlersuchen, Meinungen. Kein Veröffentlichungsplan, keine künstliche Serie.",
+          "Hier landen Dinge, die ich beim Bauen oder Hören gelernt habe: Anleitungen, Fehlersuche, Meinungen. Kein Veröffentlichungsplan, keine künstliche Serie.",
         emptyLabel: "journal / 00",
         emptyTitle: "0 Beiträge.",
         emptyText:
@@ -357,9 +357,9 @@ export const themeCopy: ThemeCopyTable = {
 
   "jtl-nova": {
     de: {
-      brand: { subtitle: "Storefront", aria: "TCTCL — Startseite" },
+      brand: { subtitle: "Schaufenster", aria: "TCTCL — Startseite" },
       home: {
-        eyebrow: "TCTCL / Onlineshop / Katalog",
+        eyebrow: "TCTCL / Schaufenster / Katalog",
         title: "Musik, Code und",
         accent: "halbfertige Ideen.",
         intro: [
@@ -394,7 +394,7 @@ export const themeCopy: ThemeCopyTable = {
         eyebrow: "Ratgeber",
         title: "Notizen aus der Werkstatt.",
         intro:
-          "Anleitungen, Fehlersuchen und Meinungen. Kein Veröffentlichungsplan, keine künstliche Serie.",
+          "Anleitungen, Fehlersuche und Meinungen. Kein Veröffentlichungsplan, keine künstliche Serie.",
         emptyLabel: "Ratgeber / 00",
         emptyTitle: "Noch nichts veröffentlicht.",
         emptyText:
@@ -428,7 +428,7 @@ export const themeCopy: ThemeCopyTable = {
     en: {
       brand: { subtitle: "Storefront", aria: "TCTCL — homepage" },
       home: {
-        eyebrow: "TCTCL / online store / catalogue",
+        eyebrow: "TCTCL / storefront / catalogue",
         title: "Music, code and",
         accent: "half-finished ideas.",
         intro: [
@@ -541,7 +541,7 @@ export const themeCopy: ThemeCopyTable = {
         eyebrow: "Thought Leadership",
         title: "Notizen aus der Werkstatt.",
         intro:
-          "Anleitungen, Fehlersuchen und Meinungen. Kein Veröffentlichungsplan, keine künstliche Serie.",
+          "Anleitungen, Fehlersuche und Meinungen. Kein Veröffentlichungsplan, keine künstliche Serie.",
         emptyLabel: "Insights / 00",
         emptyTitle: "Noch nichts veröffentlicht.",
         emptyText:
@@ -795,7 +795,7 @@ export const themeCopy: ThemeCopyTable = {
         eyebrow: "Journal",
         title: "Notizen aus der Werkstatt.",
         intro:
-          "Hier landen Dinge, die ich beim Bauen oder Hören gelernt habe: Anleitungen, Fehlersuchen, Meinungen. Kein Veröffentlichungsplan.",
+          "Hier landen Dinge, die ich beim Bauen oder Hören gelernt habe: Anleitungen, Fehlersuche, Meinungen. Kein Veröffentlichungsplan.",
         emptyLabel: "Journal / 00",
         emptyTitle: "Noch nichts veröffentlicht.",
         emptyText:

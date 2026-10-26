@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import { LanguageSwitch } from "@/components/language-switch";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -7,9 +8,10 @@ import {
   blogPath,
   homePath,
   roomPath,
+  stylePath,
   type CurrentSection,
 } from "@/lib/routes";
-import type { ThemeId } from "@/lib/theme-ids";
+import { themeIds, type ThemeId } from "@/lib/theme-ids";
 import { interfaceCopy, themeChrome } from "@/themes/chrome";
 import { getThemeCopy } from "@/themes/copy";
 
@@ -50,6 +52,22 @@ function activeFor(key: CurrentSection, current?: CurrentSection): boolean {
   return (
     key === current ||
     (key === "journal" && (current === "journal" || current === "article"))
+  );
+}
+
+function NovaIcon({ children }: { children: ReactNode }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {children}
+    </svg>
   );
 }
 
@@ -160,36 +178,133 @@ export function SiteHeader({
 
   if (theme === "jtl-nova") {
     const chrome = themeChrome["jtl-nova"][locale];
+    const currentItem = items.find((item) => activeFor(item.key, current));
+    const journal = blogPath(locale);
+    const styles = stylePath(locale);
+    const showBreadcrumb = Boolean(current && current !== "home");
 
     return (
-      <header className="shop-header">
-        <div className="shop-utility">
-          <p>
-            <span className="shop-utility-strong">TCTCL</span>
-            <span className="shop-utility-sep" aria-hidden="true">
-              |
-            </span>
-            {chrome.utility}
-          </p>
-          <div className="shop-utility-links">
-            {language}
-            {switcher("inline")}
+      <header className="nova-header">
+        <div className="nova-topbar">
+          <div className="nova-container nova-topbar-inner">
+            <div className="nova-topbar-tools">{switcher("inline")}</div>
+
+            <div className="nova-topbar-nav">
+              <span className="nova-currency" title={chrome.currency}>
+                EUR
+              </span>
+              <span className="nova-lang">{language}</span>
+              <Link href={journal}>{copy.nav.journal}</Link>
+              <Link href={roomPath("about", locale)}>{copy.nav.about}</Link>
+            </div>
           </div>
         </div>
 
-        <div className="shop-header-main">
-          <Link href={home} className="shop-brand" aria-label={copy.brand.aria}>
-            <span className="shop-brand-name">TCTCL</span>
-            <span className="shop-brand-sub">{copy.brand.subtitle}</span>
-          </Link>
+        <div className="nova-header-main">
+          <div className="nova-container nova-header-row">
+            <details className="nova-menu">
+              <summary aria-label={chrome.menu} title={chrome.menu}>
+                <NovaIcon>
+                  <path d="M4 7h16M4 12h16M4 17h16" />
+                </NovaIcon>
+              </summary>
+              <div className="nova-menu-panel">
+                <InlineNav
+                  items={items}
+                  current={current}
+                  className="nova-menu-nav"
+                  locale={locale}
+                />
+                <Link href={styles} className="nova-menu-extra">
+                  {chrome.styles} <span aria-hidden="true">→</span>
+                </Link>
+                <div className="nova-menu-tools">
+                  {language}
+                  {switcher("inline")}
+                </div>
+              </div>
+            </details>
 
-          <InlineNav
-            items={items}
-            current={current}
-            className="shop-categories"
-            locale={locale}
-          />
+            <Link href={home} className="nova-brand" aria-label={copy.brand.aria}>
+              <span className="nova-mark" aria-hidden="true">
+                T
+              </span>
+              <span className="nova-brand-name">tctcl</span>
+            </Link>
+
+            <InlineNav
+              items={items}
+              current={current}
+              className="nova-nav"
+              locale={locale}
+            />
+
+            <div className="nova-icons">
+              <Link
+                href={journal}
+                className="nova-icon"
+                aria-label={copy.nav.journal}
+                title={copy.nav.journal}
+              >
+                <NovaIcon>
+                  <circle cx="10.5" cy="10.5" r="6" />
+                  <path d="m15 15 4.5 4.5" />
+                </NovaIcon>
+              </Link>
+              <Link
+                href={roomPath("about", locale)}
+                className="nova-icon"
+                aria-label={copy.nav.about}
+                title={copy.nav.about}
+              >
+                <NovaIcon>
+                  <circle cx="12" cy="8" r="3.4" />
+                  <path d="M5 20c.7-3.4 3.4-5.2 7-5.2s6.3 1.8 7 5.2" />
+                </NovaIcon>
+              </Link>
+              <Link
+                href={roomPath("projects", locale)}
+                className="nova-icon"
+                aria-label={copy.nav.projects}
+                title={copy.nav.projects}
+              >
+                <NovaIcon>
+                  <path d="M12 20.2 4.8 13a4.4 4.4 0 0 1 6.2-6.2l1 1 1-1A4.4 4.4 0 0 1 19.2 13Z" />
+                </NovaIcon>
+              </Link>
+              <Link
+                href={styles}
+                className="nova-icon nova-icon--bag"
+                aria-label={`${chrome.styles} (${themeIds.length})`}
+                title={`${chrome.styles} (${themeIds.length})`}
+              >
+                <NovaIcon>
+                  <path d="M5.5 8.5h13l-1 11h-11Z" />
+                  <path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" />
+                </NovaIcon>
+                <span className="nova-icon-badge" aria-hidden="true">
+                  {themeIds.length}
+                </span>
+              </Link>
+            </div>
+          </div>
         </div>
+
+        {showBreadcrumb ? (
+          <div className="nova-breadcrumb">
+            <div className="nova-container">
+              <nav aria-label={chrome.breadcrumb}>
+                <Link href={home}>{copy.nav.home}</Link>
+                <span className="nova-breadcrumb-sep" aria-hidden="true">
+                  /
+                </span>
+                <span aria-current="page">
+                  {currentItem?.label ?? copy.nav.journal}
+                </span>
+              </nav>
+            </div>
+          </div>
+        ) : null}
       </header>
     );
   }

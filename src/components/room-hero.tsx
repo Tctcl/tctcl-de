@@ -17,7 +17,7 @@ export function RoomHero({
   const copy = getThemeRoomCopy(locale, room, theme);
 
   return (
-    <header className="border-b border-border">
+    <header className="room-hero border-b border-border">
       <div className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-16">
         <div className="grid gap-8 md:grid-cols-12 md:gap-6">
           <div className="flex items-end justify-between gap-6 md:col-span-3 md:block">

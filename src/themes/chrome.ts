@@ -31,9 +31,13 @@ type ThemeChrome = {
     assetsNote: string;
   };
   "jtl-nova": {
-    utility: string;
+    menu: string;
+    breadcrumb: string;
+    currency: string;
+    styles: string;
     sku: string;
     category: string;
+    categories: string;
     availability: string;
     availabilityValue: string;
     price: string;
@@ -43,13 +47,29 @@ type ThemeChrome = {
     condition: string;
     conditionValue: string;
     flavorLabel: string;
+    flavorNote: string;
     inProgress: string;
     catalog: string;
+    journal: string;
     service: string;
+    allRooms: string;
+    orderLabel: string;
+    orderValue: string;
+    stockLabel: string;
+    stockHeading: string;
+    stockValue: string;
+    salesLabel: string;
+    salesValue: string;
+    sidebarNote: string;
+    newsletterTitle: string;
+    newsletterText: string;
+    newsletterCta: string;
+    newsletterNote: string;
     noCart: string;
     noPrices: string;
     noShipping: string;
     styleCookie: string;
+    disclaimer: string;
   };
   hype: {
     topLine: string;
@@ -142,9 +162,13 @@ export const themeChrome: { [K in ThemeId]: Record<Locale, ThemeChrome[K]> } = {
 
   "jtl-nova": {
     de: {
-      utility: "Kein Tracking. Ein Cookie für den Stil.",
+      menu: "Menü",
+      breadcrumb: "Pfadnavigation",
+      currency: "Euro — es gibt keine Preise",
+      styles: "Stile",
       sku: "Art.-Nr.",
       category: "Kategorie",
+      categories: "Kategorien",
       availability: "Verfügbarkeit",
       availabilityValue: "dauerhaft unbestimmt",
       price: "Preis",
@@ -154,18 +178,40 @@ export const themeChrome: { [K in ThemeId]: Record<Locale, ThemeChrome[K]> } = {
       condition: "Zustand",
       conditionValue: "in Arbeit",
       flavorLabel: "Produktdetails",
+      flavorNote: "Kein Lager, kein Preis, kein Warenkorb.",
       inProgress: "in Arbeit",
       catalog: "Katalog",
+      journal: "Journal",
       service: "Service",
+      allRooms: "Alle Räume",
+      orderLabel: "Reihenfolge",
+      orderValue: "Werkstatt",
+      stockLabel: "Lagerbestand",
+      stockHeading: "Bestand",
+      stockValue: "keiner",
+      salesLabel: "Verkauf",
+      salesValue: "nicht vorgesehen",
+      sidebarNote:
+        "Kein Shop: keine Preise, kein Warenkorb, kein Versand. Die Kategorien sind echte Seiten.",
+      newsletterTitle: "Kein Newsletter. Nur das Journal.",
+      newsletterText:
+        "Kein Formular, keine Anmeldung, kein Versand. Neue Texte erscheinen direkt im Journal.",
+      newsletterCta: "Journal öffnen",
+      newsletterNote: "Ein Cookie für den Stil. Sonst nichts.",
       noCart: "Kein Warenkorb",
       noPrices: "Keine Preise",
       noShipping: "Kein Versand",
       styleCookie: "Ein Cookie für den Stil",
+      disclaimer: "Hommage an JTL-Shop Nova. Keine Verbindung zu JTL.",
     },
     en: {
-      utility: "No tracking. One cookie for the style.",
+      menu: "Menu",
+      breadcrumb: "Breadcrumb",
+      currency: "Euro — there are no prices",
+      styles: "Styles",
       sku: "Item no.",
       category: "Category",
+      categories: "Categories",
       availability: "Availability",
       availabilityValue: "permanently undetermined",
       price: "Price",
@@ -175,13 +221,31 @@ export const themeChrome: { [K in ThemeId]: Record<Locale, ThemeChrome[K]> } = {
       condition: "Condition",
       conditionValue: "in progress",
       flavorLabel: "Product details",
+      flavorNote: "No stock, no price, no cart.",
       inProgress: "in progress",
       catalog: "Catalogue",
+      journal: "Journal",
       service: "Service",
+      allRooms: "All rooms",
+      orderLabel: "Order",
+      orderValue: "Workshop",
+      stockLabel: "Stock",
+      stockHeading: "Stock",
+      stockValue: "none",
+      salesLabel: "Sale",
+      salesValue: "not intended",
+      sidebarNote:
+        "Not a shop: no prices, no cart, no shipping. The categories are real pages.",
+      newsletterTitle: "No newsletter. Just the journal.",
+      newsletterText:
+        "No form, no sign-up, no mailing. New writing appears straight in the journal.",
+      newsletterCta: "Open journal",
+      newsletterNote: "One cookie for the style. Nothing else.",
       noCart: "No cart",
       noPrices: "No prices",
       noShipping: "No shipping",
       styleCookie: "One cookie for the style",
+      disclaimer: "Homage to JTL-Shop Nova. Not affiliated with JTL.",
     },
   },
 

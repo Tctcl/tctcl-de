@@ -1,167 +1,269 @@
 import Link from "next/link";
 
-import { ArticleCard } from "@/components/article-card";
+import { RoomMark } from "@/components/room-mark";
 import { SiteShell } from "@/components/site-shell";
-import { homePath } from "@/lib/routes";
+import { formatShortDate } from "@/lib/format";
+import { blogPath, homePath, postPath, stylePath } from "@/lib/routes";
+import { themeIds } from "@/lib/theme-ids";
 import { themeChrome } from "@/themes/chrome";
 import type { ThemeHomeProps } from "@/themes/types";
 
 import { getHomeData } from "./data";
 
+/**
+ * A light storefront in the shape of the JTL Shop NOVA template: utility bar,
+ * white header, category sidebar, product-like cards and a newsletter footer.
+ * There is no check-out here, so every commerce slot states what it really is.
+ */
 export function JtlNovaHome({ locale, theme }: ThemeHomeProps) {
-  const { copy, posts, now, hotbar } = getHomeData(locale, theme);
+  const { copy, posts, now, rooms } = getHomeData(locale, theme);
   const alternateHref = homePath(locale === "de" ? "en" : "de");
   const chrome = themeChrome["jtl-nova"][locale];
+  const journal = blogPath(locale);
+  const styles = stylePath(locale);
 
   return (
     <SiteShell locale={locale} alternateHref={alternateHref} current="home" theme={theme}>
-      <div className="shop-page">
-        <p className="shop-breadcrumb">
-          {copy.nav.home} <span aria-hidden="true">/</span>{" "}
-          {copy.brand.subtitle}
-        </p>
+      <div className="shop-breadcrumb-band">
+        <div className="nova-container">
+          <nav aria-label={chrome.breadcrumb} className="shop-breadcrumb">
+            <Link href={homePath(locale)}>{copy.nav.home}</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{copy.brand.subtitle}</span>
+          </nav>
+        </div>
+      </div>
 
-        <section className="shop-hero" aria-labelledby="shop-title">
-          <div className="shop-hero-media" aria-hidden="true">
-            <span className="shop-hero-block shop-hero-block--a" />
-            <span className="shop-hero-block shop-hero-block--b" />
-            <span className="shop-hero-block shop-hero-block--c" />
-            <span className="shop-hero-caption">TCTCL / {copy.brand.subtitle}</span>
-          </div>
+      <div className="nova-container shop-layout">
+        <aside className="shop-sidebar" aria-label={chrome.categories}>
+          <p className="shop-sidebar-title">{chrome.categories}</p>
 
-          <div className="shop-hero-copy">
-            <p className="shop-kicker">{copy.home.eyebrow}</p>
-            <h1 id="shop-title" className="shop-heading">
-              {copy.home.title}{" "}
-              <span>{copy.home.accent}</span>
-            </h1>
-
-            <div className="shop-intro">
-              {copy.home.intro.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-
-            <div className="shop-actions">
-              <a href="#rooms" className="shop-button">
-                {copy.home.roomCta}
-              </a>
-              <Link href={hotbar[2].href} className="shop-button shop-button--ghost">
-                {copy.nav.journal}
-              </Link>
-            </div>
-          </div>
-
-          <aside className="shop-specs" aria-label={copy.home.marginalLabel}>
-            <p className="shop-specs-title">{copy.home.marginalLabel}</p>
-            <dl>
-              {copy.home.marginalFacts.map((fact) => (
-                <div key={fact.term}>
-                  <dt>{fact.term}</dt>
-                  <dd>{fact.value}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="shop-specs-note">{copy.home.marginalNote}</p>
-          </aside>
-        </section>
-
-        <nav className="shop-chip-row" aria-label={copy.home.roomsLabel}>
-          <p>{copy.home.roomsLabel}</p>
-          {hotbar.map((room) => (
-            <Link key={room.key} href={room.href} className="shop-chip">
-              {room.label}
-            </Link>
-          ))}
-        </nav>
-
-        <section id="rooms" className="shop-section scroll-mt-24" aria-labelledby="shop-rooms">
-          <div className="shop-section-head">
-            <p className="shop-kicker">00 / {copy.home.roomsLabel}</p>
-            <h2 id="shop-rooms" className="shop-heading shop-heading--small">
-              {copy.home.roomsTitle}
-            </h2>
-            <p>{copy.home.roomsIntro}</p>
-          </div>
-
-          <div className="shop-cards">
-            {hotbar.map((room) => (
-              <Link key={room.key} href={room.href} className="shop-card">
-                <div className="shop-card-media" aria-hidden="true">
-                  <span>{room.index}</span>
-                </div>
-                <div className="shop-card-body">
-                  <p className="shop-card-sku">
-                    {chrome.sku} TCTCL-{room.index}
-                  </p>
-                  <h3>{room.label}</h3>
-                  <p className="shop-card-teaser">{room.teaser}</p>
-                  <p className="shop-card-tags">{room.tags.join(" · ")}</p>
-                  <p className="shop-card-cta">{copy.home.roomCta} →</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="shop-section shop-section--tinted" aria-labelledby="shop-now">
-          <div className="shop-section-head">
-            <p className="shop-kicker">01 / {copy.home.nowLabel}</p>
-            <h2 id="shop-now" className="shop-heading shop-heading--small">
-              {copy.home.nowTitle}
-            </h2>
-            <p>{copy.home.nowIntro}</p>
-          </div>
-
-          <ol className="shop-now-list">
-            {now.map((entry, index) => (
-              <li key={entry.title}>
-                <span className="shop-now-index">{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3>{entry.title}</h3>
-                  <p className="shop-now-tag">{entry.tag}</p>
-                </div>
-                <p className="shop-now-text">{entry.text}</p>
-                <span className="shop-now-state">{chrome.inProgress}</span>
+          <ul className="shop-cats">
+            <li>
+              <span className="shop-cats-current" aria-current="page">
+                {copy.nav.home}
+              </span>
+            </li>
+            {rooms.map((room) => (
+              <li key={room.key}>
+                <Link href={room.href}>{room.label}</Link>
               </li>
             ))}
-          </ol>
-        </section>
+            <li>
+              <Link href={journal}>{copy.nav.journal}</Link>
+            </li>
+            <li>
+              <Link href={styles}>
+                {chrome.styles} ({themeIds.length})
+              </Link>
+            </li>
+          </ul>
 
-        <section className="shop-section" aria-labelledby="shop-journal">
-          <div className="shop-section-head">
-            <p className="shop-kicker">02 / {copy.home.journalLabel}</p>
-            <h2 id="shop-journal" className="shop-heading shop-heading--small">
-              {copy.home.journalTitle}
-            </h2>
-            <p>{copy.home.journalIntro}</p>
+          <div className="shop-sidebar-block">
+            <p className="shop-sidebar-title">{chrome.stockHeading}</p>
+            <dl className="shop-filter-list">
+              <div>
+                <dt>{chrome.stockLabel}</dt>
+                <dd>{chrome.stockValue}</dd>
+              </div>
+              <div>
+                <dt>{chrome.salesLabel}</dt>
+                <dd>{chrome.salesValue}</dd>
+              </div>
+              <div>
+                <dt>{chrome.price}</dt>
+                <dd>{chrome.priceValue}</dd>
+              </div>
+              <div>
+                <dt>{chrome.shipping}</dt>
+                <dd>{chrome.shippingValue}</dd>
+              </div>
+            </dl>
           </div>
 
-          {posts.length > 0 ? (
-            <>
-              <ol className="shop-posts">
-                {posts.map((post) => (
-                  <li key={post.slug}>
-                    <ArticleCard post={post} locale={locale} />
-                  </li>
+          <p className="shop-sidebar-note">{chrome.sidebarNote}</p>
+        </aside>
+
+        <div className="shop-main">
+          <section className="shop-banner" aria-labelledby="shop-title">
+            <div className="shop-banner-copy">
+              <p className="shop-kicker">{copy.home.eyebrow}</p>
+              <h1 id="shop-title" className="shop-banner-title">
+                {copy.home.title} <span>{copy.home.accent}</span>
+              </h1>
+              <div className="shop-banner-intro">
+                {copy.home.intro.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
                 ))}
-              </ol>
-              <p className="shop-more">
-                <Link href={hotbar[2].href}>{copy.home.allPosts} →</Link>
+              </div>
+              <div className="shop-actions">
+                <a href="#rooms" className="shop-button">
+                  {copy.home.roomCta}
+                </a>
+                <Link href={journal} className="shop-button shop-button--ghost">
+                  {copy.nav.journal}
+                </Link>
+              </div>
+            </div>
+
+            <aside
+              className="shop-banner-facts"
+              aria-label={copy.home.marginalLabel}
+            >
+              <p className="shop-kicker">{copy.home.marginalLabel}</p>
+              <dl className="shop-facts">
+                {copy.home.marginalFacts.map((fact) => (
+                  <div key={fact.term}>
+                    <dt>{fact.term}</dt>
+                    <dd>{fact.value}</dd>
+                  </div>
+                ))}
+                <div>
+                  <dt>{chrome.price}</dt>
+                  <dd>{chrome.priceValue}</dd>
+                </div>
+              </dl>
+              <p className="shop-banner-note">{copy.home.marginalNote}</p>
+            </aside>
+          </section>
+
+          <section
+            id="rooms"
+            className="shop-results scroll-mt-24"
+            aria-labelledby="shop-rooms"
+          >
+            <div className="shop-results-head">
+              <div>
+                <p className="shop-kicker">01 / {chrome.catalog}</p>
+                <h2 id="shop-rooms">{copy.home.roomsTitle}</h2>
+                <p>{copy.home.roomsIntro}</p>
+              </div>
+              <p className="shop-result-count">
+                {rooms.length} {chrome.categories}
               </p>
-            </>
-          ) : (
-            <div className="shop-empty">
-              <p className="shop-kicker">{copy.blog.emptyLabel}</p>
-              <h3>{copy.home.journalEmptyTitle}</h3>
-              <p>{copy.home.journalEmptyText}</p>
-              <p>{copy.home.journalEmptyNote}</p>
-              <Link href={hotbar[2].href} className="shop-button shop-button--ghost">
-                {copy.home.allPosts}
+            </div>
+
+            <div className="shop-toolbar">
+              <p>
+                <strong>{chrome.orderLabel}:</strong> {chrome.orderValue}
+              </p>
+              <Link href={styles}>
+                {chrome.styles} ({themeIds.length}) <span aria-hidden="true">→</span>
               </Link>
             </div>
-          )}
-        </section>
+
+            <div className="shop-cards">
+              {rooms.map((room, index) => {
+                const number = String(index + 1).padStart(2, "0");
+
+                return (
+                  <article key={room.key} className="shop-card">
+                    <Link href={room.href} className="shop-card-link">
+                      <div className="shop-card-media">
+                        {index === 0 ? (
+                          <span className="shop-ribbon">TCTCL</span>
+                        ) : null}
+                        <RoomMark
+                          variant={room.key}
+                          sizeClassName="shop-room-mark"
+                        />
+                        <span className="shop-card-index" aria-hidden="true">
+                          {number}
+                        </span>
+                      </div>
+                      <div className="shop-card-body">
+                        <p className="shop-card-sku">
+                          {chrome.sku} TCTCL-{number}
+                        </p>
+                        <h3 className="shop-card-title">{room.label}</h3>
+                        <p className="shop-card-teaser">{room.teaser}</p>
+                        <p className="shop-card-tags">{room.tags.join(" · ")}</p>
+                        <p className="shop-card-price">{chrome.priceValue}</p>
+                      </div>
+                      <span className="shop-card-action">
+                        {copy.home.roomCta} <span aria-hidden="true">→</span>
+                      </span>
+                    </Link>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+
+          <section className="shop-section" aria-labelledby="shop-now">
+            <div className="shop-section-head">
+              <div>
+                <p className="shop-kicker">02 / {copy.home.nowLabel}</p>
+                <h2 id="shop-now">{copy.home.nowTitle}</h2>
+                <p>{copy.home.nowIntro}</p>
+              </div>
+              <p className="shop-section-count">
+                {String(now.length).padStart(2, "0")} / {copy.home.nowLabel}
+              </p>
+            </div>
+
+            <div className="shop-now-grid">
+              {now.map((entry, index) => (
+                <article key={entry.title} className="shop-now-card">
+                  <span className="shop-now-index" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3>{entry.title}</h3>
+                  <p className="shop-now-tag">{entry.tag}</p>
+                  <p className="shop-now-text">{entry.text}</p>
+                  <span className="shop-now-state">{chrome.inProgress}</span>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="shop-section" aria-labelledby="shop-journal">
+            <div className="shop-section-head">
+              <div>
+                <p className="shop-kicker">03 / {copy.home.journalLabel}</p>
+                <h2 id="shop-journal">{copy.home.journalTitle}</h2>
+                <p>{copy.home.journalIntro}</p>
+              </div>
+              <Link href={journal}>
+                {copy.home.allPosts} <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+
+            {posts.length > 0 ? (
+              <div className="shop-journal-grid">
+                {posts.map((post) => (
+                  <article key={post.slug} className="shop-journal-card">
+                    <time dateTime={post.date} className="shop-journal-date">
+                      {formatShortDate(post.date, locale)}
+                    </time>
+                    <h3>
+                      <Link href={postPath(locale, post.slug)}>
+                        {post.title}
+                      </Link>
+                    </h3>
+                    <p>{post.description}</p>
+                    <span className="shop-journal-more" aria-hidden="true">
+                      →
+                    </span>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="shop-empty">
+                <p className="shop-kicker">{copy.blog.emptyLabel}</p>
+                <h3>{copy.blog.emptyTitle}</h3>
+                <p>{copy.blog.emptyText}</p>
+                <p className="shop-empty-note">{copy.blog.emptyNote}</p>
+                <Link
+                  href={journal}
+                  className="shop-button shop-button--ghost"
+                >
+                  {copy.home.allPosts}
+                </Link>
+              </div>
+            )}
+          </section>
+        </div>
       </div>
     </SiteShell>
   );

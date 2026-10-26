@@ -63,33 +63,38 @@ export function RoomFlavor({
 
     return (
       <div className="room-flavor flavor-shop" aria-label={chrome.flavorLabel}>
-        <p className="shop-kicker">{chrome.flavorLabel}</p>
-        <dl className="shop-flavor-specs">
-          <div>
-            <dt>{chrome.sku}</dt>
-            <dd>TCTCL-{copy.index}</dd>
+        <div className="nova-container shop-flavor-inner">
+          <div className="shop-flavor-head">
+            <p className="shop-kicker">{chrome.flavorLabel}</p>
+            <p className="shop-flavor-note">{chrome.flavorNote}</p>
           </div>
-          <div>
-            <dt>{chrome.category}</dt>
-            <dd>{copy.label}</dd>
-          </div>
-          <div>
-            <dt>{chrome.availability}</dt>
-            <dd>{chrome.availabilityValue}</dd>
-          </div>
-          <div>
-            <dt>{chrome.price}</dt>
-            <dd>{chrome.priceValue}</dd>
-          </div>
-          <div>
-            <dt>{chrome.shipping}</dt>
-            <dd>{chrome.shippingValue}</dd>
-          </div>
-          <div>
-            <dt>{chrome.condition}</dt>
-            <dd>{chrome.conditionValue}</dd>
-          </div>
-        </dl>
+          <dl className="shop-flavor-specs">
+            <div>
+              <dt>{chrome.sku}</dt>
+              <dd>TCTCL-{copy.index}</dd>
+            </div>
+            <div>
+              <dt>{chrome.category}</dt>
+              <dd>{copy.label}</dd>
+            </div>
+            <div>
+              <dt>{chrome.availability}</dt>
+              <dd>{chrome.availabilityValue}</dd>
+            </div>
+            <div>
+              <dt>{chrome.price}</dt>
+              <dd>{chrome.priceValue}</dd>
+            </div>
+            <div>
+              <dt>{chrome.shipping}</dt>
+              <dd>{chrome.shippingValue}</dd>
+            </div>
+            <div>
+              <dt>{chrome.condition}</dt>
+              <dd>{chrome.conditionValue}</dd>
+            </div>
+          </dl>
+        </div>
       </div>
     );
   }

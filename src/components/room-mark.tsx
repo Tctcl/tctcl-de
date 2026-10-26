@@ -1,6 +1,7 @@
 type RoomMarkProps = {
   variant: "tinkering" | "projects" | "about" | "work" | "journal";
   className?: string;
+  sizeClassName?: string;
 };
 
 function TinkeringMark() {
@@ -74,9 +75,13 @@ function JournalMark() {
   );
 }
 
-export function RoomMark({ variant, className = "" }: RoomMarkProps) {
+export function RoomMark({
+  variant,
+  className = "",
+  sizeClassName = "h-12 w-20",
+}: RoomMarkProps) {
   return (
-    <div aria-hidden="true" className={`h-12 w-20 ${className}`}>
+    <div aria-hidden="true" className={`${sizeClassName} ${className}`}>
       {variant === "tinkering" ? <TinkeringMark /> : null}
       {variant === "projects" ? <ProjectsMark /> : null}
       {variant === "about" ? <AboutMark /> : null}
