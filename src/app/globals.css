@@ -1,3 +1,24 @@
+/* Self-hosted fonts, served from this origin via Fontsource (OFL-1.1).
+   Every family is declared up front, but unicode-range and font matching mean
+   a theme only downloads the files it actually renders. */
+@import "@fontsource-variable/fraunces/wght.css";
+@import "@fontsource-variable/fraunces/wght-italic.css";
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/inter/wght-italic.css";
+@import "@fontsource-variable/montserrat/wght.css";
+@import "@fontsource-variable/montserrat/wght-italic.css";
+@import "@fontsource-variable/open-sans/wght.css";
+@import "@fontsource-variable/open-sans/wght-italic.css";
+@import "@fontsource-variable/source-serif-4/wght.css";
+@import "@fontsource-variable/source-serif-4/wght-italic.css";
+@import "@fontsource-variable/space-grotesk/wght.css";
+@import "@fontsource/ibm-plex-mono/latin-400.css";
+@import "@fontsource/ibm-plex-mono/latin-500.css";
+@import "@fontsource/ibm-plex-mono/latin-600.css";
+@import "@fontsource/ibm-plex-mono/latin-700.css";
+@import "@fontsource/press-start-2p/latin-400.css";
+@import "@fontsource/vt323/latin-400.css";
+
 @import "tailwindcss";
 
 @theme inline {
@@ -58,14 +79,14 @@
   --ash: #e9e4da;
   --ink: #171512;
   --font-body:
-    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
+    "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-display:
-    "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia,
-    "Times New Roman", serif;
+    "Fraunces Variable", "Iowan Old Style", "Palatino Linotype", Palatino,
+    "Book Antiqua", Georgia, "Times New Roman", serif;
   --font-mono-stack:
-    "SFMono-Regular", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Menlo,
-    Consolas, "Liberation Mono", monospace;
+    "IBM Plex Mono", "SFMono-Regular", ui-monospace, "Cascadia Mono",
+    "Segoe UI Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
 }
 
@@ -756,6 +777,17 @@ summary {
   letter-spacing: -0.02em;
 }
 
+.style-card[data-theme="minecraft"] .style-card-heading {
+  font-size: 1rem;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.style-card[data-theme="minecraft"] .style-card-body {
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
 .style-card-body {
   margin-top: 0.5rem;
   color: var(--muted-foreground);
@@ -908,6 +940,9 @@ summary {
   --blood-deep: #2fa85e;
   --ash: #07100b;
   --ink: #0b1a11;
+  --font-mono-stack:
+    "IBM Plex Mono", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Menlo,
+    Consolas, "Liberation Mono", monospace;
   --font-body: var(--font-mono-stack);
   --font-display: var(--font-mono-stack);
   --paper-grain: none;
@@ -1414,9 +1449,10 @@ summary {
   --blood-deep: #1f4a14;
   --ash: #d8e8bd;
   --ink: #2b1d10;
-  --font-display: "Courier New", ui-monospace, "Cascadia Mono", monospace;
-  --font-body:
-    "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display:
+    "Press Start 2P", "Courier New", ui-monospace, "Cascadia Mono", monospace;
+  --font-body: "VT323", "Courier New", ui-monospace, monospace;
+  --font-mono-stack: "VT323", "Courier New", ui-monospace, monospace;
   --paper-grain: none;
   color-scheme: light;
 }
@@ -1592,10 +1628,10 @@ summary {
 .mc-heading {
   margin-top: 0.6rem;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-size: clamp(1.65rem, 4.2vw, 3rem);
   font-weight: 700;
-  line-height: 0.98;
-  letter-spacing: 0.01em;
+  line-height: 1.14;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: #2b1d10;
   text-shadow: 3px 3px 0 #a8c47c;
@@ -1608,7 +1644,8 @@ summary {
 }
 
 .mc-heading--small {
-  font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+  font-size: clamp(1.25rem, 2.6vw, 1.9rem);
+  line-height: 1.2;
   text-shadow: 2px 2px 0 #b7d18c;
 }
 
@@ -1619,8 +1656,8 @@ summary {
   padding: 0.9rem;
   box-shadow: inset 0 0 0 2px #d8c79b;
   font-family: var(--font-body);
-  font-size: 0.92rem;
-  line-height: 1.65;
+  font-size: 1rem;
+  line-height: 1.55;
   color: #2b1d10;
 }
 
@@ -1760,8 +1797,8 @@ summary {
 .mc-section-head > p:last-child {
   margin-top: 0.4rem;
   color: #4b5830;
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.55;
 }
 
 .mc-blocks {
@@ -2130,11 +2167,14 @@ summary {
   --ash: #f5f7fa;
   --ink: #525252;
   --font-display:
-    Montserrat, "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    "Montserrat Variable", "Segoe UI", ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
   --font-body:
-    "Open Sans", "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    "Open Sans Variable", "Segoe UI", ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
   --font-mono-stack:
-    "Open Sans", "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    "Open Sans Variable", "Segoe UI", ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
   --paper-grain: none;
   color-scheme: light;
 }
@@ -3800,9 +3840,14 @@ summary {
   --ash: #fbf8ff;
   --ink: #1c0b33;
   --font-display:
-    "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    "Space Grotesk Variable", "Segoe UI", ui-sans-serif, system-ui,
+    -apple-system, sans-serif;
   --font-body:
-    "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    "Inter Variable", "Segoe UI", ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+  --font-mono-stack:
+    "IBM Plex Mono", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Menlo,
+    Consolas, "Liberation Mono", monospace;
   --paper-grain: none;
   color-scheme: light;
 }
@@ -4510,8 +4555,9 @@ summary {
   --blood-deep: #ff00ff;
   --ash: #000033;
   --ink: #000022;
-  --font-display: "Trebuchet MS", Verdana, Geneva, sans-serif;
-  --font-body: Verdana, Geneva, sans-serif;
+  --font-display: "VT323", "Trebuchet MS", Verdana, Geneva, sans-serif;
+  --font-body: "VT323", Verdana, Geneva, sans-serif;
+  --font-mono-stack: "VT323", ui-monospace, "Courier New", monospace;
   --paper-grain: none;
   color-scheme: dark;
 }
@@ -4695,8 +4741,8 @@ summary {
   margin: 1rem auto 0;
   max-width: 42rem;
   color: #dbeaff;
-  font-size: 0.85rem;
-  line-height: 1.65;
+  font-size: 0.95rem;
+  line-height: 1.55;
   text-align: left;
 }
 
@@ -5138,11 +5184,14 @@ summary {
   --ash: #f4f1e8;
   --ink: #1a1a1a;
   --font-display:
-    "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia,
-    "Times New Roman", serif;
+    "Source Serif 4 Variable", "Iowan Old Style", "Palatino Linotype", Palatino,
+    "Book Antiqua", Georgia, "Times New Roman", serif;
   --font-body:
-    "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia,
-    "Times New Roman", serif;
+    "Source Serif 4 Variable", "Iowan Old Style", "Palatino Linotype", Palatino,
+    "Book Antiqua", Georgia, "Times New Roman", serif;
+  --font-mono-stack:
+    "IBM Plex Mono", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Menlo,
+    Consolas, "Liberation Mono", monospace;
   --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.1'/%3E%3C/svg%3E");
   color-scheme: light;
 }

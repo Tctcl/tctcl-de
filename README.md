@@ -18,7 +18,9 @@ stores which of the seven visual styles you chose.
 - Unified/Remark/Rehype and Shiki for rendering and syntax highlighting
 - pnpm
 
-System fonts are used throughout, so there are no font files to download.
+Self-hosted variable fonts are bundled from Fontsource packages and served from
+the site origin. No Google Fonts request, no third-party font CDN. See
+[`docs/fonts.md`](docs/fonts.md) for the stacks, packages and licences.
 
 ## Local development
 
@@ -99,15 +101,15 @@ abandoned work can be described as what it is.
 The site ships seven visual styles. Each one changes colours, layout and voice,
 not just a palette:
 
-| Style | Character |
-| --- | --- |
-| Werkstatt | The default: ash, ink, paper, editorial grids |
-| Konsole | Terminal, boot log, `ls`-style rooms |
-| Minecraft | Blocky workshop with hotbar and inventory |
-| JTL Nova | Light storefront in the shape of JTL Shop NOVA: utility bar, category sidebar, product-like cards, no cart |
-| Hype | Startup satire with real numbers and a visible satire label |
-| Retro 90s | Under construction, hit counter, guestbook jokes |
-| Papier | Dossier, footnotes, two columns |
+| Style | Character | Type |
+| --- | --- | --- |
+| Werkstatt | The default: ash, ink, paper, editorial grids | Fraunces / Inter / IBM Plex Mono |
+| Konsole | Terminal, boot log, `ls`-style rooms | IBM Plex Mono |
+| Minecraft | Blocky workshop with hotbar and inventory | Press Start 2P / VT323 |
+| JTL Nova | Light storefront in the shape of JTL Shop NOVA: utility bar, category sidebar, product-like cards, no cart | Montserrat / Open Sans |
+| Hype | Startup satire with real numbers and a visible satire label | Space Grotesk / Inter |
+| Retro 90s | Under construction, hit counter, guestbook jokes | VT323 |
+| Papier | Dossier, footnotes, two columns | Source Serif 4 / IBM Plex Mono |
 
 All seven are selectable in the header, in the footer and in the gallery at
 [`/stile`](https://tctcl.de/stile) and `/en/styles`. The switcher is a native
@@ -116,8 +118,14 @@ client-side theme state or data fetching is involved.
 
 JTL Nova borrows the layout language of the NOVA template — utility bar,
 category sidebar, product-like cards, light surfaces and a yellow accent — but
-uses no template assets. Its Open Sans/Montserrat stack falls back to the system
-sans until a webfont decision is made.
+uses no template assets. Its Montserrat/Open Sans pairing is self-hosted from
+Fontsource, like every other style.
+
+Each style declares its own `--font-display`, `--font-body` and
+`--font-mono-stack`. Only the active style's families are rendered, so a visitor
+downloads only that style's WOFF2 files; `unicode-range` keeps requests to the
+Latin subsets. Full stacks, package versions and the SIL Open Font License are
+documented in [`docs/fonts.md`](docs/fonts.md).
 
 ### Selection and persistence
 
@@ -174,7 +182,8 @@ Theme voice is layered over the canonical copy instead of duplicating it:
 - Long-form room paragraphs and articles stay shared across all styles
 
 Minecraft and JTL Nova are explicit homages. The names appear with a disclaimer;
-no logos, textures, fonts or other assets are copied. Every number in the Hype
+no logos, textures, template font files or other assets are copied. Typefaces
+come from Fontsource under the SIL Open Font License. Every number in the Hype
 style comes from the real content and the style is labelled as satire in the
 page itself. No projects, clients, metrics or activity are invented for any
 style.
