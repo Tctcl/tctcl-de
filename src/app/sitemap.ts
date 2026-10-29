@@ -5,7 +5,14 @@ import {
   getBlogPageCount,
 } from "@/lib/content";
 import { locales, type Locale } from "@/lib/locale";
-import { blogPagePath, homePath, postPath } from "@/lib/routes";
+import {
+  blogPagePath,
+  homePath,
+  postPath,
+  roomIds,
+  roomPath,
+  stylePath,
+} from "@/lib/routes";
 import { absoluteUrl } from "@/lib/site";
 
 function asDate(value: string): Date {
@@ -36,6 +43,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
         languages: {
           de: absoluteUrl(homePath("de")),
           en: absoluteUrl(homePath("en")),
+        },
+      },
+    });
+
+    for (const room of roomIds) {
+      entries.push({
+        url: absoluteUrl(roomPath(room, locale)),
+        changeFrequency: "monthly",
+        priority: 0.8,
+        alternates: {
+          languages: {
+            de: absoluteUrl(roomPath(room, "de")),
+            en: absoluteUrl(roomPath(room, "en")),
+          },
+        },
+      });
+    }
+
+    entries.push({
+      url: absoluteUrl(stylePath(locale)),
+      changeFrequency: "monthly",
+      priority: 0.6,
+      alternates: {
+        languages: {
+          de: absoluteUrl(stylePath("de")),
+          en: absoluteUrl(stylePath("en")),
         },
       },
     });

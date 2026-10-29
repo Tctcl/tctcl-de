@@ -54,7 +54,7 @@ export function ArticleCard({
 
       <div className="flex items-baseline justify-between gap-4 md:col-span-3 md:block md:text-right">
         <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">
-          {post.readingTime} {copy.writing.minRead}
+          {post.readingTime} {copy.article.minRead}
         </p>
         <span
           aria-hidden="true"

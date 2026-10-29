@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { getCopy } from "@/content/site-copy";
+import { getRoomCopy } from "@/content/rooms";
 import {
   getBlogPageCount,
   getTranslation,
@@ -8,7 +9,14 @@ import {
 } from "@/lib/content";
 import { locales, otherLocale, type Locale } from "@/lib/locale";
 import { defaultOgImage, pageMetadata } from "@/lib/metadata";
-import { blogPagePath, homePath, postPath } from "@/lib/routes";
+import {
+  blogPagePath,
+  homePath,
+  postPath,
+  roomPath,
+  stylePath,
+  type RoomId,
+} from "@/lib/routes";
 
 export function homeMetadata(locale: Locale): Metadata {
   const copy = getCopy(locale);
@@ -26,6 +34,22 @@ export function homeMetadata(locale: Locale): Metadata {
       ...defaultOgImage(locale),
       alt: copy.meta.ogAlt,
     },
+  });
+}
+
+export function roomMetadata(locale: Locale, room: RoomId): Metadata {
+  const copy = getRoomCopy(locale, room);
+
+  return pageMetadata({
+    locale,
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    path: roomPath(room, locale),
+    alternates: {
+      de: roomPath(room, "de"),
+      en: roomPath(room, "en"),
+    },
+    image: defaultOgImage(locale),
   });
 }
 
@@ -50,6 +74,26 @@ export function blogIndexMetadata(locale: Locale, page: number): Metadata {
       : copy.blog.pageDescription.replace("{page}", String(page)),
     path: blogPagePath(locale, page),
     alternates,
+    image: defaultOgImage(locale),
+  });
+}
+
+export function styleGalleryMetadata(locale: Locale): Metadata {
+  return pageMetadata({
+    locale,
+    title:
+      locale === "de"
+        ? "Stile — sieben Werkstätten"
+        : "Styles — seven workshops",
+    description:
+      locale === "de"
+        ? "Alle Stile der TCTCL-Werkstatt: Werkstatt, Konsole, Minecraft, JTL Nova, Hype, Retro 90s und Papier."
+        : "All TCTCL workshop styles: Workshop, Terminal, Minecraft, JTL Nova, Hype, Retro 90s and Paper.",
+    path: stylePath(locale),
+    alternates: {
+      de: stylePath("de"),
+      en: stylePath("en"),
+    },
     image: defaultOgImage(locale),
   });
 }

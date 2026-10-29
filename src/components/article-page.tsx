@@ -6,7 +6,6 @@ import { CopyCodeEnhancer } from "@/components/copy-code-enhancer";
 import { JsonLd } from "@/components/json-ld";
 import { SiteShell } from "@/components/site-shell";
 import { TableOfContents } from "@/components/table-of-contents";
-import { getCopy } from "@/content/site-copy";
 import {
   getRelatedPosts,
   getTranslation,
@@ -16,14 +15,22 @@ import {
 import { formatDate, formatShortDate } from "@/lib/format";
 import { blogPath, postPath } from "@/lib/routes";
 import { absoluteUrl } from "@/lib/site";
+import { defaultTheme, type ThemeId } from "@/lib/theme-ids";
 import {
   articleStructuredData,
   breadcrumbStructuredData,
 } from "@/lib/structured-data";
+import { getThemeCopy } from "@/themes/copy";
 
-export async function ArticlePage({ post }: { post: Post }) {
+export async function ArticlePage({
+  post,
+  theme = defaultTheme,
+}: {
+  post: Post;
+  theme?: ThemeId;
+}) {
   const locale = post.language;
-  const copy = getCopy(locale);
+  const copy = getThemeCopy(locale, theme);
   const { html, headings } = await renderPost(post);
   const translation = getTranslation(post);
   const related = getRelatedPosts(post);
@@ -40,6 +47,7 @@ export async function ArticlePage({ post }: { post: Post }) {
       locale={locale}
       alternateHref={translationHref}
       current="article"
+      theme={theme}
     >
       <JsonLd
         id="article-jsonld"

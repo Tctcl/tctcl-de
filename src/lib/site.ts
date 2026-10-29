@@ -2,20 +2,20 @@ import type { Locale } from "./locale";
 
 export const SITE = {
   url: "https://tctcl.de",
-  name: "TCTCL Labs",
+  name: "TCTCL",
   author: "TCTCL",
   defaultOgImage: "/og.png",
   defaultOgImageAlt: {
-    de: "TCTCL Labs — Software, E-Commerce und Experimente",
-    en: "TCTCL Labs — software, e-commerce and experiments",
+    de: "TCTCL — Musik, Software und Dinge dazwischen",
+    en: "TCTCL — music, software and things in between",
   },
   jobTitle: {
-    de: "Softwareentwickler",
-    en: "Software developer",
+    de: "Softwareentwickler im E-Commerce",
+    en: "Software developer in e-commerce",
   },
   description: {
-    de: "TCTCL Labs: Entwicklung, Integrationen und Werkzeuge für JTL-Shop, JTL-Wawi und den E-Commerce. Außerdem Musik, Self-Hosting und Dinge, die einfach interessant sind.",
-    en: "TCTCL Labs: development, integrations and tooling for JTL-Shop, JTL-Wawi and e-commerce. Also music, self-hosting and things that are simply interesting.",
+    de: "Persönliche Werkstatt von TCTCL: E-Commerce-Entwicklung, Self-Hosting, Musik und Projekte, die nicht unbedingt ein Produkt werden müssen.",
+    en: "TCTCL's personal workshop: e-commerce development, self-hosting, music and projects that don't have to become products.",
   },
   knowsAbout: [
     "JTL-Shop",
@@ -30,6 +30,9 @@ export const SITE = {
     "Linux",
     "Docker",
     "Self-Hosting",
+    "Electronic Music",
+    "DJing",
+    "Audio",
   ],
 } as const;
 

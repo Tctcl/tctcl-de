@@ -4,7 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "404 — TCTCL Labs",
+  title: "404 — TCTCL",
   description:
     "Diese Seite existiert nicht. This page does not exist.",
   robots: {
@@ -35,7 +35,7 @@ export default function GlobalNotFound() {
               TCTCL
             </Link>
             <span className="font-mono text-[9px] uppercase tracking-[0.32em] text-muted-foreground">
-              Labs
+              Werkstatt
             </span>
           </div>
         </header>
@@ -81,7 +81,7 @@ export default function GlobalNotFound() {
 
         <footer className="border-t border-border">
           <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-4 font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-8">
-            <p>Kein Tracking. Keine Cookies. Kein Banner.</p>
+            <p>Ein Cookie für den Stil. Kein Tracking. Kein Banner.</p>
             <p>tctcl.de</p>
           </div>
         </footer>
